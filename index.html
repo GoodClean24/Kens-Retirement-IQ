@@ -7,6 +7,28 @@
 <style>
 :root{--bg:#090d12;--card:#111821;--card2:#17212c;--card3:#0e151d;--border:#273344;--text:#f7f9fc;--sub:#c0cad6;--muted:#8794a6;--green:#37d67a;--yellow:#ffd34d;--blue:#57a8ff;--orange:#ff9e42;--red:#ff5c68}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial}.app{max-width:1180px;margin:auto;padding:18px}.header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px}.brand h1{font-size:25px;margin:0;font-weight:950}.brand p{margin:3px 0 0;color:var(--sub);font-size:14px}.headerActions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.pill,.smallBtn{padding:9px 12px;border:1px solid var(--border);border-radius:12px;color:var(--sub);font-size:12px;font-weight:850;background:var(--card);cursor:pointer}.smallBtn.primary{background:var(--blue);color:#06101b;border-color:transparent}input[type=file]{display:none}.layout{display:grid;grid-template-columns:1.55fr .85fr;gap:14px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px}.hero{border-width:2px}.eyebrow{font-size:12px;font-weight:950;letter-spacing:.09em}.heroTop{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.big{font-size:31px;font-weight:1000;margin:4px 0 2px}.priceLine{font-size:17px;font-weight:900;margin-top:4px}.sub{color:var(--sub);line-height:1.45}.next{margin-top:13px;border-radius:13px;padding:13px 14px;font-weight:780}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:17px;font-weight:950;margin-bottom:8px}.nowgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{background:var(--card3);border:1px solid var(--border);border-radius:13px;padding:12px}.metricTop{display:flex;align-items:center;justify-content:space-between;gap:8px}.metricLabel{color:var(--sub);font-size:12px;font-weight:800}.metricValue{font-size:22px;font-weight:950;margin:3px 0}.metricExplain{font-size:12px;color:var(--sub);line-height:1.35}.statusDot{width:9px;height:9px;border-radius:50%}.setupList{display:grid;gap:8px}.setupRow{background:var(--card3);border:1px solid var(--border);border-radius:13px;padding:11px 12px}.setupRowTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.setupName{font-weight:900}.setupState{font-size:11px;font-weight:950;padding:4px 7px;border-radius:7px}.progress{height:9px;background:#273242;border-radius:999px;overflow:hidden;margin:8px 0 5px}.progressFill{height:100%;border-radius:999px}.row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}.row:last-child{border:0}.lbl{color:var(--sub);font-size:13px}.val{font-weight:900;text-align:right}.checkList{margin-top:6px}.checkRow{display:grid;grid-template-columns:1fr auto;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}.checkRow:last-child{border:0}.small{font-size:12px;color:var(--muted)}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.stat{background:var(--card2);border-radius:12px;padding:10px;text-align:center}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--sub)}.bar{height:15px;background:#293342;border-radius:999px;position:relative;margin:10px 0 5px;overflow:visible}.sweet{position:absolute;height:100%;background:var(--green);border-radius:999px;opacity:.85}.marker{position:absolute;width:4px;height:25px;background:#fff;top:-5px;border-radius:4px;box-shadow:0 0 7px #fff}.btn{border:0;border-radius:13px;padding:13px 15px;font-size:15px;font-weight:950;cursor:pointer}.btn-buy{background:var(--green);color:#06130c}.btn-sell{background:var(--red);color:#190609}.actions{display:flex;gap:9px;margin-top:12px}.actions .btn{flex:1}.callout{background:var(--card3);border:1px solid var(--border);border-radius:13px;padding:12px;margin-top:10px}.warning{border-color:#6f5d1f;background:#2a2410}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal.show{display:flex}.modalbox{width:min(470px,100%);background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px}.field{width:100%;background:#0d131b;border:1px solid var(--border);color:#fff;border-radius:12px;padding:13px;font-size:17px;margin:5px 0 12px}@media(max-width:820px){.layout{grid-template-columns:1fr}.app{padding:12px}.big{font-size:27px}.nowgrid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.header{align-items:flex-start}.headerActions{max-width:190px}.nowgrid{grid-template-columns:1fr}.statgrid{grid-template-columns:repeat(3,1fr)}}
+
+.setupLearn{display:grid;gap:10px}
+.setupExplain{background:var(--card3);border:1px solid var(--border);border-radius:14px;padding:13px}
+.setupExplain h3{margin:0 0 5px;font-size:15px}
+.requirements{display:grid;gap:7px;margin-top:10px}
+.req{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
+.req:last-child{border-bottom:0}
+.reqTitle{font-size:13px;font-weight:850}
+.reqDetail{font-size:12px;color:var(--sub);margin-top:2px}
+.reqStatus{font-size:11px;font-weight:950;padding:5px 8px;border-radius:8px;white-space:nowrap}
+.histStrip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:11px}
+.histBox{background:var(--card2);border-radius:11px;padding:9px;text-align:center}
+.histBox b{display:block;font-size:17px}
+.histBox span{font-size:10px;color:var(--sub)}
+.whyNot{margin-top:10px;padding:10px 11px;border:1px solid var(--border);border-radius:11px;background:#0b1219;font-size:12px;line-height:1.4;color:var(--sub)}
+.setupRow.expanded{padding:0;overflow:hidden}
+.setupRow.expanded .setupRowHead{padding:12px}
+.setupRowBody{padding:0 12px 12px}
+.setupMeaning{font-size:12px;color:var(--sub);line-height:1.4;margin:4px 0 8px}
+.sampleWarn{font-size:10px;color:var(--muted);margin-top:7px}
+@media(max-width:520px){.histStrip{grid-template-columns:repeat(2,1fr)}}
+
 </style>
 </head>
 <body>
@@ -20,7 +42,7 @@
       <div class="card hero" id="hero"></div>
       <div class="card" style="margin-top:14px"><div class="sectionTitle"><span>What's Happening Now</span><span class="small" id="dataDepth"></span></div><div class="nowgrid" id="nowGrid"></div></div>
       <div class="card" style="margin-top:14px" id="setupCard"></div>
-      <div class="card" style="margin-top:14px"><div class="sectionTitle"><span>All 4 Setups</span><span class="small">Closest opportunity first</span></div><div class="setupList" id="setupList"></div></div>
+      <div class="card" style="margin-top:14px"><div class="sectionTitle"><span>How Each Setup Works</span><span class="small">Requirements + today's values + history</span></div><div class="setupList" id="setupList"></div></div>
     </main>
     <aside><div class="card" id="positionCard"></div><div class="card" style="margin-top:14px" id="historyCard"></div><div class="card" style="margin-top:14px" id="dataCard"></div></aside>
   </div>
@@ -130,6 +152,111 @@ function progressObj(checks,labels){const passed=checks.filter(Boolean).length,s
 function setupProgress(r,prev,type){if(!r)return {score:0,state:'NO DATA',missing:'Load data'};if(type==='exceptional')return progressObj([r.rsi<30,r.atrPct>4,r.emaSlope5>-8],['RSI below 30','ATR above 4%','20 EMA slope better than -8%']);if(type==='normal')return progressObj([r.rsi>=30&&r.rsi<35,r.atrPct>4,r.volRatio>=1.25,r.emaSlope5>-6],['RSI 30–35','ATR above 4%','Volume at least 1.25×','20 EMA slope better than -6%']);if(type==='active'){const a=r.reg!=null&&r.reg<=-1,b=r.rsi<50;let c=[a,b],l=['Regression -1.00 or lower','RSI below 50'];if(a&&b){c.push(!!r.stBull);l.push('StochRSI bullish crossover')}return progressObj(c,l)}return progressObj([r.reg!=null&&r.reg>=-.5&&r.reg<=.5,prev?r.close>prev.close:false,r.mom3!=null&&r.mom3>0],['Regression -0.50 to +0.50','Today moving up','3-day move positive'])}
 function metricCard(label,value,explain,color='var(--blue)'){return `<div class="metric"><div class="metricTop"><div class="metricLabel">${label}</div><div class="statusDot" style="background:${color}"></div></div><div class="metricValue">${value}</div><div class="metricExplain">${explain}</div></div>`}
 function trendRead(r){if(!r||r.sma50==null||r.sma200==null)return ['Building…','Need more history','var(--yellow)'];if(r.close>r.sma50&&r.sma50>r.sma200)return ['Healthy','Price is above the 50 and 200 SMA.','var(--green)'];if(r.close>r.sma200)return ['Mixed','Above the 200 SMA, but the shorter trend is not fully aligned.','var(--yellow)'];return ['Weak','Price is below the 200 SMA.','var(--red)']}
+
+const setupDefs={
+ exceptional:{
+  grade:'A+',name:'Exceptional Rebound',color:'var(--red)',
+  meaning:'TQQQ has been hit unusually hard, but the pullback still has enough structure to support a rebound.',
+  history:{win:'100%',avg:'+17.6%',days:'~10 days',sample:'7 setups'},
+  smallSample:'Strong historical result, but only 7 historical setups — treat the win rate cautiously.'
+ },
+ normal:{
+  grade:'A',name:'Normal Rebound',color:'var(--orange)',
+  meaning:'A deeper pullback where TQQQ historically rebounded well without reaching full panic.',
+  history:{win:'89%',avg:'+7%',days:'5–7 days',sample:'9 setups'},
+  smallSample:'Very strong historical result, but only 9 setups — still a small sample.'
+ },
+ active:{
+  grade:'B',name:'Active',color:'var(--yellow)',
+  meaning:'A meaningful short-term pullback. First TQQQ must become stretched and soft; then momentum must begin turning back up.',
+  history:{win:'61%',avg:'+4.7%',days:'~5 days',sample:'23 setups'},
+  smallSample:'More evidence than A/A+, but still not a huge sample.'
+ },
+ continuation:{
+  grade:'C',name:'Continuation',color:'var(--blue)',
+  meaning:'TQQQ is already moving higher and sitting near its short-term trend instead of being deeply pulled back.',
+  history:{win:'54%',avg:'+1%',days:'4–5 days',sample:'133 setups'},
+  smallSample:'Largest sample, but also the weakest historical edge. This is the lower-confidence setup.'
+ }
+};
+
+function setupConditions(r,prev,type){
+  if(!r)return [];
+  if(type==='exceptional') return [
+    {title:'RSI below 30',ok:r.rsi<30,now:`Today: ${fmt(r.rsi,1)}`,need:'Needs: below 30'},
+    {title:'ATR above 4%',ok:r.atrPct>4,now:`Today: ${pct(r.atrPct)}`,need:'Needs: above 4%'},
+    {title:'20 EMA slope better than -8%',ok:r.emaSlope5>-8,now:`Today: ${pct(r.emaSlope5)}`,need:'Needs: above -8%'}
+  ];
+  if(type==='normal') return [
+    {title:'RSI between 30 and 35',ok:r.rsi>=30&&r.rsi<35,now:`Today: ${fmt(r.rsi,1)}`,need:'Needs: 30–35'},
+    {title:'ATR above 4%',ok:r.atrPct>4,now:`Today: ${pct(r.atrPct)}`,need:'Needs: above 4%'},
+    {title:'Volume at least 1.25× normal',ok:r.volRatio>=1.25,now:`Today: ${r.volRatio==null?'—':fmt(r.volRatio,2)+'×'}`,need:'Needs: 1.25× or more'},
+    {title:'20 EMA slope better than -6%',ok:r.emaSlope5>-6,now:`Today: ${pct(r.emaSlope5)}`,need:'Needs: above -6%'}
+  ];
+  if(type==='active'){
+    const baseReady=r.reg!=null&&r.reg<=-1&&r.rsi<50;
+    const out=[
+      {title:'10-Day Regression -1.00 or lower',ok:r.reg!=null&&r.reg<=-1,now:`Today: ${r.reg==null?'—':fmt(r.reg,2)}`,need:'Needs: -1.00 or lower'},
+      {title:'RSI below 50',ok:r.rsi<50,now:`Today: ${fmt(r.rsi,1)}`,need:'Needs: below 50'}
+    ];
+    if(baseReady){
+      out.push({title:'StochRSI white crosses above black',ok:!!r.stBull,now:`Today: White ${r.stWhite==null?'—':fmt(r.stWhite,1)} / Black ${r.stBlack==null?'—':fmt(r.stBlack,1)}`,need:'Needs: bullish crossover within 2 days'});
+    }
+    return out;
+  }
+  return [
+    {title:'10-Day Regression between -0.50 and +0.50',ok:r.reg!=null&&r.reg>=-.5&&r.reg<=.5,now:`Today: ${r.reg==null?'—':fmt(r.reg,2)}`,need:'Needs: -0.50 to +0.50'},
+    {title:'Today moving up',ok:!!(prev&&r.close>prev.close),now:prev?`Today: ${pct((r.close/prev.close-1)*100)}`:'Today: —',need:'Needs: positive day'},
+    {title:'3-day move positive',ok:r.mom3!=null&&r.mom3>0,now:`Today: ${r.mom3==null?'—':pct(r.mom3)}`,need:'Needs: above 0%'}
+  ];
+}
+function closestMissing(conds){
+  const m=conds.filter(c=>!c.ok);
+  return m.length?m[0].title:'All required conditions are lined up.';
+}
+function setupStatusFromConds(type,conds){
+  if(!conds.length)return 'NO DATA';
+  const pass=conds.filter(c=>c.ok).length;
+  if(pass===conds.length)return type==='active'&&conds.length<3?'PREPARING':'READY';
+  const ratio=pass/conds.length;
+  return ratio>=.66?'PREPARING':ratio>=.33?'WATCHING':'EARLY';
+}
+function setupLearnCard(r,prev,type,expanded=false){
+  const d=setupDefs[type],conds=setupConditions(r,prev,type),status=setupStatusFromConds(type,conds);
+  const pass=conds.filter(c=>c.ok).length;
+  const score=conds.length?Math.round(pass/conds.length*100):0;
+  const unmet=conds.filter(c=>!c.ok);
+  const reason=unmet.length
+    ? `Why it is not ${d.name} yet: ${unmet.map(c=>c.title).join('; ')}.`
+    : `${d.name} requirements are currently lined up.`;
+  const reqs=conds.map(c=>`<div class="req">
+    <div><div class="reqTitle">${c.title}</div><div class="reqDetail">${c.now} · ${c.need}</div></div>
+    <div class="reqStatus" style="background:${c.ok?'#37d67a18':'#ffd34d18'};color:${c.ok?'var(--green)':'var(--yellow)'}">${c.ok?'✓ READY':'WAIT'}</div>
+  </div>`).join('');
+  return `<div class="setupRow expanded">
+    <div class="setupRowHead">
+      <div class="setupRowTop">
+        <div><span class="setupName">${d.grade} — ${d.name}</span><div class="small">${status==='READY'?'All current requirements are ready.':`Next: ${closestMissing(conds)}`}</div></div>
+        <div class="setupState" style="background:color-mix(in srgb, ${d.color} 18%, transparent);color:${d.color}">${status}</div>
+      </div>
+      <div class="progress"><div class="progressFill" style="width:${score}%;background:${d.color}"></div></div>
+      <div class="small">${score}% of current requirements ready</div>
+    </div>
+    <div class="setupRowBody">
+      <div class="setupMeaning">${d.meaning}</div>
+      <div class="requirements">${reqs}</div>
+      <div class="histStrip">
+        <div class="histBox"><b>${d.history.win}</b><span>historical winners</span></div>
+        <div class="histBox"><b>${d.history.avg}</b><span>average result</span></div>
+        <div class="histBox"><b>${d.history.days}</b><span>usual hold</span></div>
+        <div class="histBox"><b>${d.history.sample}</b><span>backtest sample</span></div>
+      </div>
+      <div class="whyNot">${reason}</div>
+      <div class="sampleWarn">${d.smallSample}</div>
+    </div>
+  </div>`;
+}
+
 function stateEngine(r, prev){
  if(!r)return {name:'NO DATA',grade:'',state:'NO DATA',color:'var(--muted)',next:'Upload the TOS daily CSV to begin.',checks:[]};
  // priority A+ > A > B > C
@@ -174,8 +301,15 @@ function render(){
  const tr=trendRead(r);let regExplain='Need at least 10 daily bars to calculate Regression.',regColor='var(--yellow)';if(r?.reg!=null){if(r.reg<=-1){regExplain='Stretched below the 10-day trend — Active pullback territory.';regColor='var(--green)'}else if(r.reg<=-.5){regExplain='Below the recent trend and getting closer to Active territory.';regColor='var(--blue)'}else if(r.reg<=.5){regExplain='Near the 10-day trend — Continuation territory.';regColor='var(--green)'}else if(r.reg<1){regExplain='Above the recent trend; getting extended.';regColor='var(--yellow)'}else{regExplain='Stretched above the 10-day trend — Continuation exit territory.';regColor='var(--red)'}}
  let rsiExplain=r?.rsi==null?'RSI unavailable.':r.rsi<30?'Very oversold — Exceptional territory.':r.rsi<35?'Deep pullback — Normal territory.':r.rsi<50?'Momentum is soft enough for Active.':r.rsi<60?'Neutral-to-positive momentum.':'Momentum is strong / getting extended.';let rsiColor=r?.rsi==null?'var(--yellow)':r.rsi<35?'var(--green)':r.rsi<50?'var(--blue)':r.rsi<60?'var(--yellow)':'var(--orange)';let momExplain=r?.mom3==null?'Need 4 daily bars to calculate the 3-day move.':r.mom3>0?'The last 3 days are net positive.':'The last 3 days are still net negative.';let momColor=r?.mom3==null?'var(--yellow)':r.mom3>0?'var(--green)':'var(--yellow)';let volExplain=r?.volRatio==null?'Need about 20 daily bars to compare volume with normal.':r.volRatio>=1.25?`Volume is ${fmt(r.volRatio,2)}× normal — strong participation.`:`Volume is ${fmt(r.volRatio,2)}× normal — not unusually strong.`;let volColor=r?.volRatio==null?'var(--yellow)':r.volRatio>=1.25?'var(--green)':'var(--blue)';$('dataDepth').textContent=r?`${rows.length} saved daily bar${rows.length===1?'':'s'}`:'';
  $('nowGrid').innerHTML=r?[metricCard('10-Day Regression',r.reg==null?'—':fmt(r.reg,2),regExplain,regColor),metricCard('RSI 14',fmt(r.rsi,1),rsiExplain,rsiColor),metricCard('Trend',tr[0],tr[1],tr[2]),metricCard('3-Day Move',r.mom3==null?'—':pct(r.mom3),momExplain,momColor),metricCard('ATR / Volatility',r.atrPct==null?'—':pct(r.atrPct),r.atrPct==null?'Need ATR or enough history.':r.atrPct>4?'Volatility is high enough for the deeper rebound setups.':'Volatility is relatively calm.',r.atrPct>4?'var(--green)':'var(--blue)'),metricCard('Volume vs Normal',r.volRatio==null?'—':`${fmt(r.volRatio,2)}×`,volExplain,volColor)].join(''):`<div class="callout warning">Load TQQQ history once, then use <b>UPDATE TQQQ</b> for Dad's daily TOS file.</div>`;
- $('setupCard').innerHTML=`<div class="sectionTitle"><span>${s.name==='NONE'?'Best Current Read':`${s.grade} — ${s.name}`}</span><span class="small">${h?`Based on ${h.sample}`:''}</span></div>${r&&s.type!=='none'&&r.reg!=null?barHTML(r.reg,s.type):''}<div class="checkList">${s.checks.map(x=>`<div class="checkRow"><div><div class="lbl">${x[0]}</div><div class="small">${x[2]}</div></div><div class="val" style="color:${x[1]?'var(--green)':'var(--yellow)'}">${x[1]?'✓ READY':'WAIT'}</div></div>`).join('')}</div>${h?`<div class="statgrid"><div class="stat"><b>${h.win}</b><span>historical winners</span></div><div class="stat"><b>${h.avg}</b><span>average result</span></div><div class="stat"><b>${h.days}</b><span>usual hold</span></div></div>`:''}${rows.length<10?`<div class="callout warning"><b>Why some numbers are blank:</b> the app currently has ${rows.length} daily bar${rows.length===1?'':'s'}. Load historical TQQQ data once so Regression and the other lookback calculations work immediately.</div>`:''}`;
- const types=[['exceptional','A+','Exceptional Rebound','var(--red)'],['normal','A','Normal Rebound','var(--orange)'],['active','B','Active','var(--yellow)'],['continuation','C','Continuation','var(--blue)']];$('setupList').innerHTML=types.map(([type,grade,name,color])=>{const p=setupProgress(r,prev,type);return `<div class="setupRow"><div class="setupRowTop"><div><span class="setupName">${grade} — ${name}</span><div class="small">${p.missing==='All conditions met'?'All required conditions are ready.':`Next: ${p.missing}`}</div></div><div class="setupState" style="background:color-mix(in srgb, ${color} 18%, transparent);color:${color}">${p.state}</div></div><div class="progress"><div class="progressFill" style="width:${p.score}%;background:${color}"></div></div><div class="small">${p.score}% of current requirements ready</div></div>`}).join('');
+ $('setupCard').innerHTML=`<div class="sectionTitle"><span>${s.name==='NONE'?'Best Current Read':`${s.grade} — ${s.name}`}</span><span class="small">${h?`Backtest: ${h.sample}`:''}</span></div>
+ ${s.type!=='none'&&setupDefs[s.type]?`<div class="setupExplain"><h3>What this setup means</h3><div class="sub">${setupDefs[s.type].meaning}</div></div>`:''}
+ ${r&&s.type!=='none'&&r.reg!=null?barHTML(r.reg,s.type):''}
+ <div class="checkList">${s.checks.map(x=>`<div class="checkRow"><div><div class="lbl">${x[0]}</div><div class="small">${x[2]}</div></div><div class="val" style="color:${x[1]?'var(--green)':'var(--yellow)'}">${x[1]?'✓ READY':'WAIT'}</div></div>`).join('')}</div>
+ ${h?`<div class="statgrid"><div class="stat"><b>${h.win}</b><span>historical win rate</span></div><div class="stat"><b>${h.avg}</b><span>average result</span></div><div class="stat"><b>${h.days}</b><span>usual hold</span></div></div>`:''}
+ ${s.type!=='none'&&setupDefs[s.type]?`<div class="whyNot"><b>Why this tag:</b> ${s.state==='LIVE SETUP'?'Every required condition shown above is currently lined up.':s.next}</div><div class="sampleWarn">${setupDefs[s.type].smallSample}</div>`:''}
+ ${rows.length<10?`<div class="callout warning"><b>Why some numbers are blank:</b> the app currently has ${rows.length} daily bar${rows.length===1?'':'s'}. Load historical TQQQ data once so Regression and the other lookback calculations work immediately.</div>`:''}`;
+ const types=['exceptional','normal','active','continuation'];
+ $('setupList').innerHTML=types.map(type=>setupLearnCard(r,prev,type)).join('');
  $('positionCard').innerHTML=`<div class="sectionTitle"><span>Position</span></div><p class="sub">No open trade. The Buy button appears when a setup is ready. Once recorded, this area becomes the live HOLD / EXIT tracker.</p>`;renderHistory();$('dataCard').innerHTML=`<div class="sectionTitle"><span>Data Status</span></div><div class="row"><div class="lbl">Saved daily bars</div><div class="val">${rows.length}</div></div><div class="row"><div class="lbl">Regression ready</div><div class="val" style="color:${rows.length>=10?'var(--green)':'var(--yellow)'}">${rows.length>=10?'YES':'NEEDS 10'}</div></div><div class="row"><div class="lbl">Volume comparison ready</div><div class="val" style="color:${rows.length>=20?'var(--green)':'var(--yellow)'}">${rows.length>=20?'YES':'NEEDS 20'}</div></div><div class="small" style="margin-top:10px">Use <b>LOAD HISTORY</b> once for the initial backfill. After that, Dad only uses <b>UPDATE TQQQ</b>.</div>`;lastState={date:r?.date,state:s.state,type:s.type,reg:r?.reg,rsi:r?.rsi};localStorage.setItem('kri_laststate',JSON.stringify(lastState));}
 function renderPosition(r){
  let type=position.type,h=hist[type],pnl=r?(r.close/position.price-1)*100:null,days=Math.max(0,Math.round((new Date(r.date)-new Date(position.date))/86400000));
