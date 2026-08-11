@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Ken's Retirement IQ</title>
+<style>
+:root{
+  --bg:#0b0f14;--card:#121922;--card2:#18212d;--border:#273244;
+  --text:#f7f9fc;--sub:#b9c4d2;--muted:#8491a3;
+  --green:#36d17c;--yellow:#ffd34e;--blue:#55a7ff;--orange:#ff9f43;--red:#ff5c67;
+}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial}
+.app{max-width:980px;margin:auto;padding:18px}
+.header{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:16px}
+.brand h1{font-size:25px;margin:0;font-weight:950}.brand p{margin:4px 0 0;color:var(--sub);font-size:14px}
+.pill{padding:8px 11px;border:1px solid var(--border);border-radius:999px;color:var(--sub);font-size:12px;font-weight:800}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:17px}
+.hero{border-width:2px}.state{font-size:12px;font-weight:950;letter-spacing:.08em}.big{font-size:32px;font-weight:1000;margin:6px 0}
+.sub{color:var(--sub);line-height:1.45}.next{margin-top:14px;border-radius:14px;padding:14px;font-weight:800}
+.row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.row:last-child{border:0}.lbl{color:var(--sub);font-size:13px}.val{font-weight:900;text-align:right}
+.btn{border:0;border-radius:14px;padding:14px 16px;font-size:16px;font-weight:950;cursor:pointer}
+.btn-buy{background:var(--green);color:#06130c}.btn-sell{background:var(--red);color:#190609}.btn-upload{background:var(--blue);color:#06101b}
+.actions{display:flex;gap:10px;margin-top:14px}.actions .btn{flex:1}
+.bar{height:16px;background:#293342;border-radius:999px;position:relative;margin:12px 0 6px;overflow:visible}
+.sweet{position:absolute;height:100%;background:var(--green);border-radius:999px;opacity:.85}.marker{position:absolute;width:4px;height:26px;background:#fff;top:-5px;border-radius:4px;box-shadow:0 0 8px #fff}
+.small{font-size:12px;color:var(--muted)} .statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.stat{background:var(--card2);border-radius:12px;padding:11px;text-align:center}.stat b{display:block;font-size:19px}.stat span{font-size:11px;color:var(--sub)}
+.setup{font-size:18px;font-weight:950}.tag{display:inline-block;padding:5px 8px;border-radius:8px;font-size:11px;font-weight:950;margin-left:6px}
+.history{margin-top:14px}.uploadbox{border:2px dashed #3a4960;border-radius:16px;padding:18px;text-align:center}
+input[type=file]{display:none}
+.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}
+.modal.show{display:flex}.modalbox{width:min(470px,100%);background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px}
+.field{width:100%;background:#0d131b;border:1px solid var(--border);color:#fff;border-radius:12px;padding:13px;font-size:17px;margin:5px 0 12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.app{padding:12px}.big{font-size:28px}.statgrid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div class="brand"><h1>KEN'S RETIREMENT IQ</h1><p>Know the setup. Know the move. Know what's next.</p></div>
+    <div class="pill" id="clock">NO DATA</div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="card hero" id="hero"></div>
+      <div class="card" style="margin-top:14px" id="setupCard"></div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="setup">Daily Data</div>
+        <p class="sub">Upload Dad's TOS daily CSV. The app calculates the setup from the history.</p>
+        <div class="uploadbox">
+          <label class="btn btn-upload" for="csv">UPLOAD TOS CSV</label>
+          <input id="csv" type="file" accept=".csv,text/csv"/>
+          <div class="small" style="margin-top:13px">Needs Date, Open, High, Low, Close/Last and Volume. Indicator columns are optional.</div>
+        </div>
+      </div>
+      <div class="card history" id="positionCard"></div>
+      <div class="card history" id="historyCard"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="tradeModal"><div class="modalbox" id="tradeModalBox"></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+let rows=JSON.parse(localStorage.getItem('kri_rows')||'[]');
+let position=JSON.parse(localStorage.getItem('kri_position')||'null');
+let trades=JSON.parse(localStorage.getItem('kri_trades')||'[]');
+let lastState=JSON.parse(localStorage.getItem('kri_laststate')||'null');
+
+function n(v){let x=parseFloat(String(v??'').replace(/[$,%]/g,'').replace(/,/g,''));return Number.isFinite(x)?x:null}
+function fmt(v,d=2){return v==null?'—':Number(v).toFixed(d)}
+function pct(v,d=1){return v==null?'—':Number(v).toFixed(d)+'%'}
+function mean(a){a=a.filter(Number.isFinite);return a.length?a.reduce((x,y)=>x+y,0)/a.length:null}
+function ema(vals,len){let a=2/(len+1),out=[];vals.forEach((v,i)=>out.push(i? a*v+(1-a)*out[i-1]:v));return out}
+function sma(vals,len,i){if(i<len-1)return null;return mean(vals.slice(i-len+1,i+1))}
+function wilder(vals,len){let out=[];for(let i=0;i<vals.length;i++){if(i===0)out[i]=vals[i]||0;else out[i]=((out[i-1]*(len-1))+(vals[i]||0))/len}return out}
+function calcRSI(closes,len=14){
+ let d=closes.map((v,i)=>i?v-closes[i-1]:0),g=d.map(x=>Math.max(x,0)),l=d.map(x=>Math.max(-x,0));
+ let ag=wilder(g,len),al=wilder(l,len);return closes.map((_,i)=>al[i]===0?100:100-(100/(1+ag[i]/al[i])));
+}
+function wma(vals,len,i){if(i<len-1)return null;let s=0,w=0;for(let k=0;k<len;k++){let wt=k+1;s+=vals[i-len+1+k]*wt;w+=wt}return s/w}
+function hullSeries(vals,len){let half=Math.max(1,Math.round(len/2)),root=Math.max(1,Math.round(Math.sqrt(len))),tmp=[];
+ for(let i=0;i<vals.length;i++){let a=wma(vals,half,i),b=wma(vals,len,i);tmp[i]=(a==null||b==null)?null:2*a-b}
+ return tmp.map((_,i)=>{if(i<root-1||tmp.slice(i-root+1,i+1).some(x=>x==null))return null;return wma(tmp,root,i)});
+}
+function regZ(vals,i,w=10){if(i<w-1)return null;let y=vals.slice(i-w+1,i+1),x=[...Array(w).keys()],xm=mean(x),ym=mean(y),den=x.reduce((s,v)=>s+(v-xm)**2,0);
+ let sl=x.reduce((s,v,k)=>s+(v-xm)*(y[k]-ym),0)/den,inter=ym-sl*xm,fit=x.map(v=>inter+sl*v),res=y.map((v,k)=>v-fit[k]),sd=Math.sqrt(res.reduce((s,v)=>s+v*v,0)/(w-1));return sd?res[w-1]/sd:0}
+function parseCSV(txt){
+ let lines=txt.trim().split(/\r?\n/);if(lines.length<2)return[];
+ let h=lines[0].split(',').map(x=>x.trim().replace(/^"|"$/g,''));
+ let key=(names)=>h.findIndex(x=>names.some(z=>x.toLowerCase().includes(z)));
+ let ix={date:key(['date']),symbol:key(['symbol','ticker']),open:key(['open']),high:key(['high']),low:key(['low']),close:key(['close','last']),vol:key(['volume','vol']),rsi:key(['rsi']),atr:key(['atr']),ema:key(['ema20','ema 20']),s50:key(['sma50','sma 50']),s200:key(['sma200','sma 200'])};
+ return lines.slice(1).map(line=>{let c=line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(x=>x.trim().replace(/^"|"$/g,''));return {date:c[ix.date],symbol:ix.symbol>=0?c[ix.symbol]:'TQQQ',open:n(c[ix.open]),high:n(c[ix.high]),low:n(c[ix.low]),close:n(c[ix.close]),volume:n(c[ix.vol]),rsi:n(c[ix.rsi]),atr:n(c[ix.atr]),ema20:n(c[ix.ema]),sma50:n(c[ix.s50]),sma200:n(c[ix.s200])}}).filter(r=>r.date&&r.close!=null).sort((a,b)=>new Date(a.date)-new Date(b.date));
+}
+function enrich(rs){
+ let c=rs.map(r=>r.close), e20=ema(c,20), rsi14=calcRSI(c,14), rsi39=calcRSI(c,39);
+ // Approximate Dad StochRSI pipeline; to be verified against TOS later.
+ let st=rsi39.map((v,i)=>{if(i<38)return null;let a=rsi39.slice(i-38,i+1),lo=Math.min(...a),hi=Math.max(...a);return hi===lo?50:100*(v-lo)/(hi-lo)});
+ let white=hullSeries(st.map(x=>x??0),3), black=hullSeries(st.map(x=>x??0),2);
+ return rs.map((r,i)=>{
+   let tr=i?Math.max(r.high-r.low,Math.abs(r.high-c[i-1]),Math.abs(r.low-c[i-1])):r.high-r.low;
+   let trs=rs.slice(0,i+1).map((q,j)=>j?Math.max(q.high-q.low,Math.abs(q.high-c[j-1]),Math.abs(q.low-c[j-1])):q.high-q.low);
+   let atr=r.atr ?? wilder(trs,14)[i], av=sma(rs.map(x=>x.volume),20,i);
+   return {...r,ema20:r.ema20??e20[i],sma50:r.sma50??sma(c,50,i),sma200:r.sma200??sma(c,200,i),rsi:r.rsi??rsi14[i],atr,atrPct:atr/r.close*100,avgVol20:av,volRatio:av?r.volume/av:null,mom3:i>=3?(r.close/c[i-3]-1)*100:null,emaSlope5:i>=5?(e20[i]/e20[i-5]-1)*100:null,reg:regZ(c,i,10),stWhite:white[i],stBlack:black[i],stBull:i>0&&white[i]!=null&&black[i]!=null&&white[i]>black[i]&&white[i-1]<=black[i-1]};
+ });
+}
+function stateEngine(r, prev){
+ if(!r)return {name:'NO DATA',grade:'',state:'NO DATA',color:'var(--muted)',next:'Upload the TOS daily CSV to begin.',checks:[]};
+ // priority A+ > A > B > C
+ let ex=[['RSI below 30',r.rsi<30,`RSI ${fmt(r.rsi,1)}`],['ATR above 4%',r.atrPct>4,`ATR ${pct(r.atrPct)}`],['20 EMA slope better than -8%',r.emaSlope5>-8,`Slope ${pct(r.emaSlope5)}`]];
+ if(ex.every(x=>x[1])) return mk('EXCEPTIONAL REBOUND','A+','LIVE SETUP','var(--green)','Wait for final daily confirmation, then watch the next session entry price.',ex,'exceptional');
+ let normal=[['RSI 30–35',r.rsi>=30&&r.rsi<35,`RSI ${fmt(r.rsi,1)}`],['ATR above 4%',r.atrPct>4,`ATR ${pct(r.atrPct)}`],['Volume at least 1.25×',r.volRatio>=1.25,`Volume ${fmt(r.volRatio,2)}×`],['20 EMA slope better than -6%',r.emaSlope5>-6,`Slope ${pct(r.emaSlope5)}`]];
+ if(normal.every(x=>x[1])) return mk('NORMAL REBOUND','A','LIVE SETUP','var(--green)','Wait for final daily confirmation, then watch the next session entry price.',normal,'normal');
+ let activeBase=r.reg<=-1&&r.rsi<50;
+ if(activeBase){
+   let active=[['Regression -1.00 or lower',true,`Regression ${fmt(r.reg,2)}`],['RSI below 50',true,`RSI ${fmt(r.rsi,1)}`],['StochRSI bullish crossover',!!r.stBull,`White ${fmt(r.stWhite,1)} / Black ${fmt(r.stBlack,1)}`]];
+   if(r.stBull)return mk('ACTIVE','B','LIVE SETUP','var(--green)','Bullish crossover is present. Wait for final daily confirmation.',active,'active');
+   return mk('ACTIVE','B','PREPARING','var(--yellow)','Waiting for the StochRSI white line to cross above the black line.',active,'active');
+ }
+ let cont=[['Regression -0.50 to +0.50',r.reg>=-.5&&r.reg<=.5,`Regression ${fmt(r.reg,2)}`],['Today moving up',prev?r.close>prev.close:false,prev?`${pct((r.close/prev.close-1)*100)}`:'—'],['3-day move positive',r.mom3>0,`3-day ${pct(r.mom3)}`]];
+ if(cont.every(x=>x[1]))return mk('CONTINUATION','C','LIVE SETUP','var(--green)','Wait for final daily confirmation. This is the lower-confidence setup.',cont,'continuation');
+ // preparing/watch closest
+ if(r.rsi>=30&&r.rsi<=40)return mk('NORMAL REBOUND','A','WATCHING','var(--yellow)',`RSI is ${fmt(r.rsi,1)}. Watch for 30–35 and the other Normal conditions.`,normal,'normal');
+ if(r.reg<=-0.5||r.rsi<=52){
+   let checks=[['Regression -1.00 or lower',r.reg<=-1,`Regression ${fmt(r.reg,2)}`],['RSI below 50',r.rsi<50,`RSI ${fmt(r.rsi,1)}`]];
+   let missing=checks.filter(x=>!x[1])[0];
+   return mk('ACTIVE','B',checks.filter(x=>x[1]).length?'PREPARING':'WATCHING','var(--yellow)',missing?`Waiting for: ${missing[0]}.`:'Setup is developing.',checks,'active');
+ }
+ if(r.reg>=-.75&&r.reg<=.75)return mk('CONTINUATION','C','WATCHING','var(--blue)','Regression is near the Continuation zone. Waiting for positive price momentum.',cont,'continuation');
+ return mk('NONE','','NO TRADE','var(--muted)','No validated setup is close enough right now. Wait.',[],'none');
+}
+function mk(name,grade,state,color,next,checks,type){return{name,grade,state,color,next,checks,type}}
+const hist={
+ exceptional:{win:'100%',avg:'+17.6%',days:'~10',sample:'7 setups',stop:.12,chase:.03},
+ normal:{win:'89%',avg:'+7%',days:'5–7',sample:'9 setups',stop:null,chase:.03},
+ active:{win:'61%',avg:'+4.7%',days:'~5',sample:'23 setups',stop:.06,chase:.03},
+ continuation:{win:'54%',avg:'+1%',days:'4–5',sample:'133 setups',stop:.05,chase:.03}
+};
+function barHTML(reg,type){
+ let min=-2,max=2,p=Math.max(0,Math.min(100,(reg-min)/(max-min)*100)),l=0,w=0;
+ if(type==='active'){l=0;w=25}else if(type==='continuation'){l=37.5;w=25}else{l=25;w=25}
+ return `<div class="bar"><div class="sweet" style="left:${l}%;width:${w}%"></div><div class="marker" style="left:${p}%"></div></div><div class="small">Regression today: <b style="color:#fff">${fmt(reg,2)}</b></div>`;
+}
+function render(){
+ rows=enrich(rows);let r=rows.at(-1),prev=rows.at(-2);
+ $('clock').textContent=r?`${r.symbol||'TQQQ'} · ${r.date}`:'NO DATA';
+ if(position){renderPosition(r);return}
+ let s=stateEngine(r,prev), h=hist[s.type];
+ $('hero').style.borderColor=s.color;
+ $('hero').innerHTML=`<div class="state" style="color:${s.color}">${s.state}</div><div class="big">${s.grade?`${s.grade} — `:''}${s.name}</div>
+ <div class="sub">${r?`${r.symbol||'TQQQ'} $${fmt(r.close)} · RSI ${fmt(r.rsi,1)} · Regression ${fmt(r.reg,2)}`:'Upload daily data to start.'}</div>
+ <div class="next" style="background:color-mix(in srgb, ${s.color} 16%, transparent);border:1px solid ${s.color};"><div class="state" style="color:${s.color}">WHAT'S NEXT</div>${s.next}</div>
+ ${s.state==='LIVE SETUP'?`<div class="actions"><button class="btn btn-buy" onclick="openBuy()">BUY</button></div>`:''}`;
+ $('setupCard').innerHTML=`<div class="setup">${s.name==='NONE'?'Current Read':s.name} ${s.grade?`<span class="tag" style="background:${s.color};color:#07110b">${s.grade}</span>`:''}</div>
+ ${r&&s.type!=='none'?barHTML(r.reg,s.type):''}
+ <div style="margin-top:10px">${s.checks.map(x=>`<div class="row"><div><div class="lbl">${x[0]}</div><div class="small">${x[2]}</div></div><div class="val" style="color:${x[1]?'var(--green)':'var(--yellow)'}">${x[1]?'✓':'WAIT'}</div></div>`).join('')}</div>
+ ${h?`<div class="statgrid"><div class="stat"><b>${h.win}</b><span>historical winners</span></div><div class="stat"><b>${h.avg}</b><span>average result</span></div><div class="stat"><b>${h.days}</b><span>usual hold</span></div></div><div class="small" style="margin-top:8px">Historical sample: ${h.sample}. Past results do not guarantee future results.</div>`:''}`;
+ $('positionCard').innerHTML=`<div class="setup">Position</div><p class="sub">No open trade. When a setup triggers, BUY records the actual fill price and quantity here.</p>`;
+ renderHistory();
+ lastState={date:r?.date,state:s.state,type:s.type,reg:r?.reg,rsi:r?.rsi};localStorage.setItem('kri_laststate',JSON.stringify(lastState));
+}
+function renderPosition(r){
+ let type=position.type,h=hist[type],pnl=r?(r.close/position.price-1)*100:null,days=Math.max(0,Math.round((new Date(r.date)-new Date(position.date))/86400000));
+ let exit=false,msg='Trade is open. Follow the setup exit rule.';
+ if(type==='active'&&r.rsi>=60){exit=true;msg='RSI reached 60 — Active exit area reached.'}
+ if(type==='continuation'&&r.reg>=1){exit=true;msg='Regression reached +1.00 — Continuation exit area reached.'}
+ if(type==='normal'&&pnl>=5){msg='Normal reached +5% — consider taking half profit.'}
+ if(type==='exceptional'&&pnl>=15){msg='Exceptional reached +15% — take half profit and trail the rest.'}
+ if((type==='active'&&days>=7)||(type==='continuation'&&days>=10)||(type==='normal'&&days>=10)||(type==='exceptional'&&days>=16)){exit=true;msg='Time-based exit window reached.'}
+ $('hero').style.borderColor=exit?'var(--red)':'var(--blue)';
+ $('hero').innerHTML=`<div class="state" style="color:${exit?'var(--red)':'var(--blue)'}">${exit?'EXIT':'HOLD'}</div><div class="big">${position.grade} — ${position.name}</div>
+ <div class="sub">${position.qty} shares · Entry $${fmt(position.price)} · Current $${fmt(r?.close)} · ${days} calendar days</div>
+ <div class="next" style="background:${exit?'#ff5c6718':'#55a7ff18'};border:1px solid ${exit?'var(--red)':'var(--blue)'}"><div class="state" style="color:${exit?'var(--red)':'var(--blue)'}">WHAT'S NEXT</div>${msg}</div>
+ <div class="actions"><button class="btn btn-sell" onclick="openSell()">SELL</button></div>`;
+ $('setupCard').innerHTML=`<div class="setup">Trade Status</div>
+ <div class="row"><div class="lbl">Current gain / loss</div><div class="val" style="color:${pnl>=0?'var(--green)':'var(--red)'}">${pct(pnl)}</div></div>
+ <div class="row"><div class="lbl">Dollars invested</div><div class="val">$${fmt(position.price*position.qty)}</div></div>
+ <div class="row"><div class="lbl">Current value</div><div class="val">$${fmt((r?.close||position.price)*position.qty)}</div></div>
+ <div class="row"><div class="lbl">Stop</div><div class="val">$${fmt(position.stop)}</div></div>
+ ${r?barHTML(r.reg,type):''}`;
+ $('positionCard').innerHTML=`<div class="setup">Open Position</div><div class="row"><div class="lbl">Bought</div><div class="val">${position.date}</div></div><div class="row"><div class="lbl">Actual fill</div><div class="val">$${fmt(position.price)} × ${position.qty}</div></div>`;
+ renderHistory();
+}
+function renderHistory(){
+ $('historyCard').innerHTML=`<div class="setup">Trade History</div>${trades.length?trades.slice().reverse().slice(0,5).map(t=>`<div class="row"><div><div class="lbl">${t.grade} ${t.name}</div><div class="small">${t.buyDate} → ${t.sellDate}</div></div><div class="val" style="color:${t.pnl>=0?'var(--green)':'var(--red)'}">${pct(t.pnl)}</div></div>`).join(''):'<p class="sub">No completed trades yet.</p>'}`;
+}
+function openBuy(){
+ let r=rows.at(-1),s=stateEngine(r,rows.at(-2)),h=hist[s.type],max=r.close*(1+h.chase),risk=100;
+ let stop=s.type==='normal'?r.low-.5*r.atr:r.close*(1-h.stop);
+ let riskPer=Math.max(.01,r.close-stop),qty=Math.max(1,Math.min(Math.floor(3000/r.close),Math.floor(risk/riskPer)));
+ $('tradeModalBox').innerHTML=`<div class="setup">Confirm BUY</div><p class="sub">${s.grade} — ${s.name}</p>
+ <label class="lbl">Actual fill price</label><input class="field" id="buyPrice" value="${fmt(r.close)}">
+ <label class="lbl">Quantity</label><input class="field" id="buyQty" value="${qty}">
+ <div class="row"><div class="lbl">Maximum chase price</div><div class="val">$${fmt(max)}</div></div>
+ <div class="row"><div class="lbl">Suggested stop</div><div class="val">$${fmt(stop)}</div></div>
+ <div class="actions"><button class="btn" onclick="closeModal()">CANCEL</button><button class="btn btn-buy" onclick="confirmBuy('${s.type}','${s.grade}','${s.name}',${stop},${max})">CONFIRM BUY</button></div>`;
+ $('tradeModal').classList.add('show');
+}
+function confirmBuy(type,grade,name,stop,max){
+ let r=rows.at(-1),price=n($('buyPrice').value),qty=Math.floor(n($('buyQty').value)||0);
+ if(!price||qty<1)return alert('Enter a valid price and quantity.');
+ if(price>max&&!confirm('This fill is above the 3% maximum chase price. Record it anyway?'))return;
+ position={type,grade,name,price,qty,stop,date:r.date};
+ localStorage.setItem('kri_position',JSON.stringify(position));closeModal();render();
+}
+function openSell(){
+ let r=rows.at(-1);
+ $('tradeModalBox').innerHTML=`<div class="setup">Confirm SELL</div><p class="sub">${position.grade} — ${position.name}</p>
+ <label class="lbl">Actual sell price</label><input class="field" id="sellPrice" value="${fmt(r.close)}">
+ <label class="lbl">Quantity to sell</label><input class="field" id="sellQty" value="${position.qty}">
+ <div class="actions"><button class="btn" onclick="closeModal()">CANCEL</button><button class="btn btn-sell" onclick="confirmSell()">CONFIRM SELL</button></div>`;
+ $('tradeModal').classList.add('show');
+}
+function confirmSell(){
+ let r=rows.at(-1),price=n($('sellPrice').value),qty=Math.min(position.qty,Math.floor(n($('sellQty').value)||0));if(!price||qty<1)return alert('Enter a valid sell price and quantity.');
+ let pnl=(price/position.price-1)*100;trades.push({grade:position.grade,name:position.name,buyDate:position.date,sellDate:r.date,buy:position.price,sell:price,qty,pnl});
+ position.qty-=qty;if(position.qty<=0)position=null;
+ localStorage.setItem('kri_position',JSON.stringify(position));localStorage.setItem('kri_trades',JSON.stringify(trades));closeModal();render();
+}
+function closeModal(){$('tradeModal').classList.remove('show')}
+$('csv').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{let x=parseCSV(rd.result);if(!x.length)return alert('I could not read the CSV. Make sure it includes Date and daily price columns.');rows=x;localStorage.setItem('kri_rows',JSON.stringify(rows));render()};rd.readAsText(f)});
+$('tradeModal').addEventListener('click',e=>{if(e.target===$('tradeModal'))closeModal()});
+render();
+</script>
+</body></html>
