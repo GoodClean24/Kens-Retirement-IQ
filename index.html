@@ -55,7 +55,7 @@ input[type=file]{display:none}
         <div class="uploadbox">
           <label class="btn btn-upload" for="csv">UPLOAD TOS CSV</label>
           <input id="csv" type="file" accept=".csv,text/csv"/>
-          <div class="small" style="margin-top:13px">Needs Date, Open, High, Low, Close/Last and Volume. Indicator columns are optional.</div>
+          <div class="small" style="margin-top:13px">Reads the date from the filename with or without the ticker (examples: 2026-08-10-Quote_tqqq.csv or 2026-08-10-Quote.csv). Same-day uploads update today's row; a new date adds a new day.</div>
         </div>
       </div>
       <div class="card history" id="positionCard"></div>
@@ -91,12 +91,68 @@ function hullSeries(vals,len){let half=Math.max(1,Math.round(len/2)),root=Math.m
 }
 function regZ(vals,i,w=10){if(i<w-1)return null;let y=vals.slice(i-w+1,i+1),x=[...Array(w).keys()],xm=mean(x),ym=mean(y),den=x.reduce((s,v)=>s+(v-xm)**2,0);
  let sl=x.reduce((s,v,k)=>s+(v-xm)*(y[k]-ym),0)/den,inter=ym-sl*xm,fit=x.map(v=>inter+sl*v),res=y.map((v,k)=>v-fit[k]),sd=Math.sqrt(res.reduce((s,v)=>s+v*v,0)/(w-1));return sd?res[w-1]/sd:0}
-function parseCSV(txt){
- let lines=txt.trim().split(/\r?\n/);if(lines.length<2)return[];
- let h=lines[0].split(',').map(x=>x.trim().replace(/^"|"$/g,''));
- let key=(names)=>h.findIndex(x=>names.some(z=>x.toLowerCase().includes(z)));
- let ix={date:key(['date']),symbol:key(['symbol','ticker']),open:key(['open']),high:key(['high']),low:key(['low']),close:key(['close','last']),vol:key(['volume','vol']),rsi:key(['rsi']),atr:key(['atr']),ema:key(['ema20','ema 20']),s50:key(['sma50','sma 50']),s200:key(['sma200','sma 200'])};
- return lines.slice(1).map(line=>{let c=line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(x=>x.trim().replace(/^"|"$/g,''));return {date:c[ix.date],symbol:ix.symbol>=0?c[ix.symbol]:'TQQQ',open:n(c[ix.open]),high:n(c[ix.high]),low:n(c[ix.low]),close:n(c[ix.close]),volume:n(c[ix.vol]),rsi:n(c[ix.rsi]),atr:n(c[ix.atr]),ema20:n(c[ix.ema]),sma50:n(c[ix.s50]),sma200:n(c[ix.s200])}}).filter(r=>r.date&&r.close!=null).sort((a,b)=>new Date(a.date)-new Date(b.date));
+function dateFromFileName(fileName,txt){
+  // Accepts both:
+  // 2026-08-10-Quote_tqqq.csv
+  // 2026-08-10-Quote.csv
+  // and any other filename that starts/contains YYYY-MM-DD.
+  const m=String(fileName||'').match(/(\d{4})-(\d{2})-(\d{2})/);
+  if(m) return `${m[1]}-${m[2]}-${m[3]}`;
+
+  // Fallback: TOS preamble such as "Quote on 8/10/26 18:01:11"
+  const q=String(txt||'').match(/Quote on\s+(\d{1,2})\/(\d{1,2})\/(\d{2,4})/i);
+  if(q){
+    let yy=parseInt(q[3],10); if(yy<100) yy+=2000;
+    return `${yy}-${String(q[1]).padStart(2,'0')}-${String(q[2]).padStart(2,'0')}`;
+  }
+  return null;
+}
+function csvCells(line){
+  return String(line).split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(x=>x.trim().replace(/^"|"$/g,''));
+}
+function parseCSV(txt,fileName){
+  const lines=String(txt||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  if(!lines.length) return [];
+
+  // TOS Quote exports may include title/preamble lines. Find the real header.
+  const headerIndex=lines.findIndex(line=>{
+    const low=line.toLowerCase();
+    return low.includes('symbol') && low.includes('last') && low.includes('open') && low.includes('high') && low.includes('low');
+  });
+  if(headerIndex<0) return [];
+
+  const h=csvCells(lines[headerIndex]);
+  const key=(names)=>h.findIndex(x=>names.some(z=>x.toLowerCase().replace(/\s+/g,'').includes(z.replace(/\s+/g,''))));
+  const ix={
+    date:key(['date']),symbol:key(['symbol','ticker']),open:key(['open']),high:key(['high']),
+    low:key(['low']),close:key(['close','last']),vol:key(['volume','vol']),rsi:key(['rsi']),
+    atr:key(['atr']),ema:key(['ema20']),s50:key(['sma50']),s200:key(['sma200']),avgvol:key(['avgvol20','averagevolume20'])
+  };
+  const fallbackDate=dateFromFileName(fileName,txt);
+
+  return lines.slice(headerIndex+1).map(line=>{
+    const c=csvCells(line);
+    const get=i=>i>=0?c[i]:null;
+    return {
+      date: ix.date>=0 ? get(ix.date) : fallbackDate,
+      symbol: ix.symbol>=0 ? get(ix.symbol) : 'TQQQ',
+      open:n(get(ix.open)), high:n(get(ix.high)), low:n(get(ix.low)), close:n(get(ix.close)),
+      volume:n(get(ix.vol)), rsi:n(get(ix.rsi)), atr:n(get(ix.atr)),
+      ema20:n(get(ix.ema)), sma50:n(get(ix.s50)), sma200:n(get(ix.s200)),
+      avgVol20:n(get(ix.avgvol))
+    };
+  }).filter(r=>r.date&&r.close!=null).sort((a,b)=>new Date(a.date)-new Date(b.date));
+}
+function mergeUploadedRows(existing,incoming){
+  const map=new Map();
+  (existing||[]).forEach(r=>{ if(r&&r.date) map.set(`${r.symbol||'TQQQ'}|${r.date}`,r); });
+  (incoming||[]).forEach(r=>{
+    if(!r||!r.date) return;
+    const k=`${r.symbol||'TQQQ'}|${r.date}`;
+    // Same-day upload replaces the live daily bar with the newest TOS values.
+    map.set(k,{...(map.get(k)||{}),...r});
+  });
+  return [...map.values()].sort((a,b)=>new Date(a.date)-new Date(b.date));
 }
 function enrich(rs){
  let c=rs.map(r=>r.close), e20=ema(c,20), rsi14=calcRSI(c,14), rsi39=calcRSI(c,39);
@@ -224,7 +280,21 @@ function confirmSell(){
  localStorage.setItem('kri_position',JSON.stringify(position));localStorage.setItem('kri_trades',JSON.stringify(trades));closeModal();render();
 }
 function closeModal(){$('tradeModal').classList.remove('show')}
-$('csv').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{let x=parseCSV(rd.result);if(!x.length)return alert('I could not read the CSV. Make sure it includes Date and daily price columns.');rows=x;localStorage.setItem('kri_rows',JSON.stringify(rows));render()};rd.readAsText(f)});
+$('csv').addEventListener('change',e=>{
+  let f=e.target.files[0]; if(!f)return;
+  let rd=new FileReader();
+  rd.onload=()=>{
+    let x=parseCSV(rd.result,f.name);
+    if(!x.length) return alert('I could not read this TOS Quote file. I need Symbol, Last, Open, High and Low. The date can come from the filename.');
+    rows=mergeUploadedRows(rows,x);
+    localStorage.setItem('kri_rows',JSON.stringify(rows));
+    render();
+    const d=x[x.length-1].date, sym=x[x.length-1].symbol||'TQQQ';
+    alert(`${sym} ${d} loaded successfully. ${rows.length} daily row${rows.length===1?'':'s'} saved in the app.`);
+    e.target.value='';
+  };
+  rd.readAsText(f);
+});
 $('tradeModal').addEventListener('click',e=>{if(e.target===$('tradeModal'))closeModal()});
 render();
 </script>
