@@ -5,112 +5,48 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Ken's Retirement IQ</title>
 <style>
-:root{--bg:#090d12;--card:#111821;--card2:#17212c;--card3:#0e151d;--border:#273344;--text:#f7f9fc;--sub:#c0cad6;--muted:#8794a6;--green:#37d67a;--yellow:#ffd34d;--blue:#57a8ff;--orange:#ff9e42;--red:#ff5c68}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial}.app{max-width:1180px;margin:auto;padding:18px}.header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px}.brand h1{font-size:25px;margin:0;font-weight:950}.brand p{margin:3px 0 0;color:var(--sub);font-size:14px}.headerActions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.pill,.smallBtn{padding:9px 12px;border:1px solid var(--border);border-radius:12px;color:var(--sub);font-size:12px;font-weight:850;background:var(--card);cursor:pointer}.smallBtn.primary{background:var(--blue);color:#06101b;border-color:transparent}input[type=file]{display:none}.layout{display:grid;grid-template-columns:1.55fr .85fr;gap:14px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px}.hero{border-width:2px}.eyebrow{font-size:12px;font-weight:950;letter-spacing:.09em}.heroTop{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.big{font-size:31px;font-weight:1000;margin:4px 0 2px}.priceLine{font-size:17px;font-weight:900;margin-top:4px}.sub{color:var(--sub);line-height:1.45}.next{margin-top:13px;border-radius:13px;padding:13px 14px;font-weight:780}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:17px;font-weight:950;margin-bottom:8px}.nowgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{background:var(--card3);border:1px solid var(--border);border-radius:13px;padding:12px}.metricTop{display:flex;align-items:center;justify-content:space-between;gap:8px}.metricLabel{color:var(--sub);font-size:12px;font-weight:800}.metricValue{font-size:22px;font-weight:950;margin:3px 0}.metricExplain{font-size:12px;color:var(--sub);line-height:1.35}.statusDot{width:9px;height:9px;border-radius:50%}.setupList{display:grid;gap:8px}.setupRow{background:var(--card3);border:1px solid var(--border);border-radius:13px;padding:11px 12px}.setupRowTop{display:flex;justify-content:space-between;align-items:center;gap:10px}.setupName{font-weight:900}.setupState{font-size:11px;font-weight:950;padding:4px 7px;border-radius:7px}.progress{height:9px;background:#273242;border-radius:999px;overflow:hidden;margin:8px 0 5px}.progressFill{height:100%;border-radius:999px}.row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}.row:last-child{border:0}.lbl{color:var(--sub);font-size:13px}.val{font-weight:900;text-align:right}.checkList{margin-top:6px}.checkRow{display:grid;grid-template-columns:1fr auto;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}.checkRow:last-child{border:0}.small{font-size:12px;color:var(--muted)}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.stat{background:var(--card2);border-radius:12px;padding:10px;text-align:center}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--sub)}.bar{height:15px;background:#293342;border-radius:999px;position:relative;margin:10px 0 5px;overflow:visible}.sweet{position:absolute;height:100%;background:var(--green);border-radius:999px;opacity:.85}.marker{position:absolute;width:4px;height:25px;background:#fff;top:-5px;border-radius:4px;box-shadow:0 0 7px #fff}.btn{border:0;border-radius:13px;padding:13px 15px;font-size:15px;font-weight:950;cursor:pointer}.btn-buy{background:var(--green);color:#06130c}.btn-sell{background:var(--red);color:#190609}.actions{display:flex;gap:9px;margin-top:12px}.actions .btn{flex:1}.callout{background:var(--card3);border:1px solid var(--border);border-radius:13px;padding:12px;margin-top:10px}.warning{border-color:#6f5d1f;background:#2a2410}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal.show{display:flex}.modalbox{width:min(470px,100%);background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px}.field{width:100%;background:#0d131b;border:1px solid var(--border);color:#fff;border-radius:12px;padding:13px;font-size:17px;margin:5px 0 12px}@media(max-width:820px){.layout{grid-template-columns:1fr}.app{padding:12px}.big{font-size:27px}.nowgrid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.header{align-items:flex-start}.headerActions{max-width:190px}.nowgrid{grid-template-columns:1fr}.statgrid{grid-template-columns:repeat(3,1fr)}}
-
-.setupLearn{display:grid;gap:10px}
-.setupExplain{background:var(--card3);border:1px solid var(--border);border-radius:14px;padding:13px}
-.setupExplain h3{margin:0 0 5px;font-size:15px}
-.requirements{display:grid;gap:7px;margin-top:10px}
-.req{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
-.req:last-child{border-bottom:0}
-.reqTitle{font-size:13px;font-weight:850}
-.reqDetail{font-size:12px;color:var(--sub);margin-top:2px}
-.reqStatus{font-size:11px;font-weight:950;padding:5px 8px;border-radius:8px;white-space:nowrap}
-.histStrip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:11px}
-.histBox{background:var(--card2);border-radius:11px;padding:9px;text-align:center}
-.histBox b{display:block;font-size:17px}
-.histBox span{font-size:10px;color:var(--sub)}
-.whyNot{margin-top:10px;padding:10px 11px;border:1px solid var(--border);border-radius:11px;background:#0b1219;font-size:12px;line-height:1.4;color:var(--sub)}
-.setupRow.expanded{padding:0;overflow:hidden}
-.setupRow.expanded .setupRowHead{padding:12px}
-.setupRowBody{padding:0 12px 12px}
-.setupMeaning{font-size:12px;color:var(--sub);line-height:1.4;margin:4px 0 8px}
-.sampleWarn{font-size:10px;color:var(--muted);margin-top:7px}
-@media(max-width:520px){.histStrip{grid-template-columns:repeat(2,1fr)}}
-
-
-.screen{display:none;max-width:900px;margin:0 auto;min-height:100vh}
-.screen.active{display:block}
-.stockiqHeader{background:#11141C;border-bottom:1px solid #1E2230;padding:16px 20px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.appTitle{font-size:24px;font-weight:950;letter-spacing:-.03em}.appTitle .iq{color:#00C805}
-.headerSub{color:#8F97A8;font-size:11px;margin-top:2px}
-.priceTop{text-align:right}.priceTicker{color:#8F97A8;font-size:10px;font-weight:900;letter-spacing:.08em}.priceValue{font-size:24px;font-weight:950;line-height:1.05}.priceMove{font-size:11px;font-weight:850;margin-top:2px}
-.toolbar{background:#0A0C10;border-bottom:1px solid #1E2230;padding:9px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:70px;z-index:9}
-.dataStamp{color:#8F97A8;font-size:11px;font-weight:750}.toolButtons{display:flex;gap:7px}.stockBtn{border-radius:20px;padding:9px 13px;font-size:12px;font-weight:900;cursor:pointer}.stockBtn.primary{background:#00C805;color:#000;border:0}.stockBtn.secondary{background:#181D27;color:#B7BFCE;border:1px solid #252A3A}
-.overviewWrap{padding:18px 16px 60px}.overviewIntro{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:3px 4px 15px}.overviewIntro h2{margin:2px 0 3px;font-size:21px}.overviewIntro p{margin:0;color:#B7BFCE;font-size:12px}.sectionEyebrow{font-size:10px;color:#8F97A8;font-weight:950;letter-spacing:.11em}.historyReady{font-size:11px;color:#8F97A8;text-align:right}
-.trendList{display:flex;flex-direction:column;gap:13px}.trendCard{background:#11141C;border:1px solid #1E2230;border-radius:17px;padding:15px 16px;cursor:pointer;transition:.15s}.trendCard:hover{border-color:#394154;transform:translateY(-1px)}
-.trendTop{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start}.trendGrade{font-size:11px;font-weight:950;letter-spacing:.07em}.trendName{font-size:19px;font-weight:950;margin-top:2px}.trendMeaning{font-size:12px;color:#B7BFCE;line-height:1.4;margin-top:4px;max-width:620px}
-.stateBadge{font-size:11px;font-weight:950;padding:6px 9px;border-radius:9px;white-space:nowrap}.readyBar{height:9px;background:#252A3A;border-radius:999px;overflow:hidden;margin:12px 0 6px}.readyFill{height:100%;border-radius:999px}.readyLine{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#8F97A8}.nextLine{margin-top:11px;background:#0D1118;border:1px solid #252A3A;border-radius:11px;padding:10px 11px;display:grid;grid-template-columns:auto 1fr;gap:9px;align-items:start}.nextLabel{font-size:9px;font-weight:950;letter-spacing:.08em;color:#8F97A8;margin-top:2px}.nextText{font-size:12px;color:#fff;font-weight:750;line-height:1.35}
-.cardStats{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}.miniStat{font-size:11px;color:#8F97A8}.miniStat b{color:#fff;font-size:13px;margin-right:3px}.cardChevron{color:#8F97A8;font-size:22px;margin-left:5px}
-.positionBanner{background:#091B30;border:1px solid #4DA8FF;border-radius:14px;padding:12px 14px;margin-bottom:13px;display:flex;justify-content:space-between;gap:10px}.positionBanner b{display:block}.positionBanner .small{color:#B7BFCE}
-.detailHeader{background:#11141C;border-bottom:1px solid #1E2230;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}.backBtn{width:38px;height:38px;border-radius:50%;border:1px solid #252A3A;background:#181D27;color:#fff;font-size:27px;line-height:1;cursor:pointer}.detailHeaderCenter{text-align:center}.detailTicker{font-size:10px;color:#8F97A8;font-weight:950;letter-spacing:.08em}.detailPrice{font-size:18px;font-weight:950}.detailWrap{padding:16px 16px 60px}
-.detailHero{background:#11141C;border:1px solid #1E2230;border-radius:18px;padding:17px}.detailGrade{font-size:11px;font-weight:950;letter-spacing:.08em}.detailName{font-size:27px;font-weight:1000;margin:3px 0}.detailMeaning{font-size:13px;color:#B7BFCE;line-height:1.5}.detailStatus{margin-top:13px;border-radius:12px;padding:12px 13px;border:1px solid #252A3A;background:#0D1118}.detailStatusTitle{font-size:10px;font-weight:950;letter-spacing:.08em;margin-bottom:4px}.detailStatusText{font-size:14px;font-weight:800;line-height:1.4}
-.detailSection{background:#11141C;border:1px solid #1E2230;border-radius:17px;padding:15px;margin-top:13px}.detailSectionTitle{font-size:16px;font-weight:950;margin-bottom:3px}.detailSectionSub{font-size:11px;color:#8F97A8;margin-bottom:10px}.patternReq{display:grid;grid-template-columns:1fr auto;gap:10px;padding:11px 0;border-bottom:1px solid #1E2230}.patternReq:last-child{border-bottom:0}.patternReqName{font-size:13px;font-weight:850}.patternReqNow{font-size:11px;color:#B7BFCE;margin-top:3px}.reqPill{font-size:10px;font-weight:950;border-radius:8px;padding:5px 7px;height:max-content}.backtestGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.backBox{background:#181D27;border-radius:12px;padding:10px;text-align:center}.backBox b{display:block;font-size:18px}.backBox span{font-size:10px;color:#8F97A8}.warningText{font-size:11px;color:#8F97A8;line-height:1.45;margin-top:9px}.indicatorList{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.indicatorItem{background:#181D27;border-radius:11px;padding:10px}.indicatorItem b{display:block;font-size:12px}.indicatorItem span{font-size:11px;color:#B7BFCE;line-height:1.35;display:block;margin-top:3px}
-.actionArea{display:flex;gap:9px;margin-top:13px}.actionArea .btn{flex:1}
-@media(max-width:560px){.overviewIntro{align-items:flex-start}.historyReady{display:none}.trendTop{grid-template-columns:1fr auto}.backtestGrid{grid-template-columns:repeat(2,1fr)}.indicatorList{grid-template-columns:1fr}.toolbar{top:69px;padding-left:12px;padding-right:12px}.stockBtn{padding:8px 10px}}
-
+:root{
+  --bg:#080b10;--panel:#11161f;--panel2:#171e29;--panel3:#0d1219;--border:#293243;
+  --text:#ffffff;--sub:#c8d0dc;--muted:#8d98a8;--green:#20d474;--yellow:#ffd24a;
+  --blue:#63adff;--red:#ff5f6d;--orange:#ff9e48;
+}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif}.app{max-width:980px;margin:0 auto;min-height:100vh}.header{padding:18px 18px 14px;border-bottom:1px solid var(--border);background:#0d1118;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;gap:14px;align-items:center}.brand{font-size:26px;font-weight:1000;letter-spacing:-.03em}.brand span{color:var(--green)}.tag{color:var(--sub);font-size:12px;margin-top:2px}.priceBox{text-align:right}.ticker{font-size:11px;color:var(--muted);font-weight:900;letter-spacing:.08em}.price{font-size:28px;font-weight:1000;line-height:1.05}.move{font-size:12px;font-weight:900;margin-top:3px}.toolbar{padding:10px 18px;border-bottom:1px solid var(--border);background:#0b0f15;display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;position:sticky;top:77px;z-index:9}.dataState{font-size:12px;color:var(--sub);font-weight:800}.buttons{display:flex;gap:7px;flex-wrap:wrap}input[type=file]{display:none}.fileBtn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:10px 12px;font-size:12px;font-weight:950;cursor:pointer;border:1px solid var(--border)}.fileBtn.history{background:#151b25;color:var(--sub)}.fileBtn.live{background:#27311c;color:#f5ffea;border-color:#596b31}.fileBtn.final{background:var(--green);color:#04110a;border-color:transparent}.wrap{padding:18px 16px 60px}.liveBanner{border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin-bottom:14px;font-size:13px;line-height:1.4}.liveBanner.live{background:#2b2510;border-color:#675a27}.liveBanner.final{background:#0d2a19;border-color:#1e6e42}.liveBanner b{font-size:13px}.hero{border-radius:22px;padding:20px;border:2px solid var(--border);background:var(--panel);margin-bottom:14px}.eyebrow{font-size:11px;font-weight:950;letter-spacing:.09em;color:var(--muted)}.decision{font-size:34px;font-weight:1000;letter-spacing:-.03em;margin:4px 0}.setupName{font-size:18px;font-weight:950;margin-top:2px}.decisionText{font-size:15px;line-height:1.5;color:var(--sub);margin-top:7px;max-width:760px}.heroMeta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chip{border:1px solid var(--border);background:var(--panel3);border-radius:10px;padding:8px 10px;font-size:12px;font-weight:900}.section{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:16px;margin-top:14px}.sectionTitle{font-size:18px;font-weight:1000;margin-bottom:3px}.sectionSub{font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.4}.checkGrid{display:grid;gap:9px}.check{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--panel3);border:1px solid var(--border);border-radius:13px;padding:11px 12px}.checkTitle{font-size:14px;font-weight:900}.checkNow{font-size:12px;color:var(--sub);margin-top:3px;line-height:1.35}.pill{font-size:11px;font-weight:1000;padding:6px 8px;border-radius:8px;white-space:nowrap}.pill.ok{background:#1b6a3b33;color:var(--green)}.pill.wait{background:#806b1733;color:var(--yellow)}.pill.no{background:#7f273033;color:var(--red)}.tosCard{background:#0b1219;border:1px solid #31445f;border-radius:14px;padding:14px;margin-top:12px}.tosTitle{font-size:15px;font-weight:1000;margin-bottom:7px}.tosStep{display:grid;grid-template-columns:28px 1fr;gap:9px;margin:9px 0;align-items:start}.num{width:28px;height:28px;border-radius:50%;background:#1b2635;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:1000;font-size:12px}.tosStep b{display:block;font-size:13px}.tosStep span{display:block;color:var(--sub);font-size:12px;line-height:1.35;margin-top:2px}.playbookRow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--panel3);border:1px solid var(--border);border-radius:14px;padding:13px;margin-top:9px}.playbookRow.active{border-color:var(--blue)}.playbookRow h3{margin:0;font-size:16px}.playbookRow p{margin:4px 0 0;color:var(--sub);font-size:12px;line-height:1.35}.statusTag{font-size:11px;font-weight:1000;padding:6px 8px;border-radius:8px}.positionHero{background:#0c1b2a;border:1px solid #3f8ed7;border-radius:18px;padding:16px}.positionTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.positionTitle{font-size:22px;font-weight:1000}.positionState{font-size:12px;font-weight:1000;padding:6px 8px;border-radius:8px}.positionGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.stat{background:#111b28;border-radius:12px;padding:10px}.stat b{display:block;font-size:18px}.stat span{font-size:10px;color:var(--muted)}.actionText{margin-top:12px;background:#0a1119;border:1px solid var(--border);border-radius:12px;padding:11px;font-size:13px;line-height:1.4}.actions{display:flex;gap:8px;margin-top:12px}.btn{border:0;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:1000;cursor:pointer}.btn.buy{background:var(--green);color:#04110a}.btn.sell{background:var(--red);color:#1a0508}.btn.secondary{background:#1b2230;color:#fff;border:1px solid var(--border)}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal.show{display:flex}.modalBox{width:min(460px,100%);background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:20px}.modalTitle{font-size:20px;font-weight:1000}.fieldLabel{font-size:12px;color:var(--sub);font-weight:900;margin-top:12px}.field{width:100%;margin-top:5px;background:#0b1017;border:1px solid var(--border);color:#fff;border-radius:11px;padding:12px;font-size:17px}.tiny{font-size:11px;color:var(--muted);line-height:1.4}.twoCol{display:grid;grid-template-columns:1fr 1fr;gap:10px}.empty{padding:26px;text-align:center;color:var(--sub)}
+@media(max-width:650px){.decision{font-size:30px}.header{padding:14px 14px 12px}.toolbar{top:72px;padding:9px 14px}.wrap{padding:14px 12px 48px}.positionGrid{grid-template-columns:1fr 1fr}.twoCol{grid-template-columns:1fr}.fileBtn{padding:9px 10px}.price{font-size:24px}}
 </style>
 </head>
 <body>
-<div id="screen-home" class="screen active">
-  <div class="stockiqHeader">
-    <div>
-      <div class="appTitle"><span>Ken's Retirement</span><span class="iq">IQ</span></div>
-      <div class="headerSub">TQQQ swing-trade playbook</div>
-    </div>
-    <div class="priceTop" id="topPrice">
-      <div class="priceTicker">TQQQ</div>
-      <div class="priceValue">—</div>
-      <div class="priceMove">No data</div>
-    </div>
-  </div>
+<div class="app">
+  <header class="header">
+    <div><div class="brand">Ken's Retirement <span>IQ</span></div><div class="tag">Simple TQQQ swing-trade guide</div></div>
+    <div class="priceBox" id="topPrice"><div class="ticker">TQQQ</div><div class="price">—</div><div class="move">No data</div></div>
+  </header>
 
   <div class="toolbar">
-    <div class="dataStamp" id="clock">NO DATA</div>
-    <div class="toolButtons">
-      <label class="stockBtn secondary" for="historyCsv">Load History</label>
-      <input id="historyCsv" type="file" accept=".csv,text/csv"/>
-      <label class="stockBtn primary" for="csv">Update TQQQ</label>
-      <input id="csv" type="file" accept=".csv,text/csv"/>
+    <div class="dataState" id="dataState">NO DATA</div>
+    <div class="buttons">
+      <label class="fileBtn history" for="historyCsv">Load History</label><input id="historyCsv" type="file" accept=".csv,text/csv"/>
+      <label class="fileBtn live" for="liveCsv">Update Live</label><input id="liveCsv" type="file" accept=".csv,text/csv"/>
+      <label class="fileBtn final" for="finalCsv">Final Daily Upload</label><input id="finalCsv" type="file" accept=".csv,text/csv"/>
     </div>
   </div>
 
-  <div class="overviewWrap">
-    <div class="overviewIntro">
-      <div>
-        <div class="sectionEyebrow">TRADE SETUPS</div>
-        <h2>Closest to a trade</h2>
-        <p>The setup closest to qualifying is automatically moved to the top.</p>
-      </div>
-      <div class="historyReady" id="historyReady"></div>
-    </div>
-
-    <div id="positionBanner"></div>
-    <div id="trend-list" class="trendList"></div>
-  </div>
+  <main class="wrap">
+    <div id="liveBanner"></div>
+    <div id="positionArea"></div>
+    <div id="decisionArea"></div>
+    <div id="detailsArea"></div>
+  </main>
 </div>
 
-<div id="screen-detail" class="screen">
-  <div class="detailHeader">
-    <button class="backBtn" id="backHome">‹</button>
-    <div class="detailHeaderCenter">
-      <div class="detailTicker">TQQQ</div>
-      <div class="detailPrice" id="detailPrice">—</div>
-    </div>
-    <div style="width:38px"></div>
-  </div>
-  <div id="detail-content" class="detailWrap"></div>
-</div>
-
-<div class="modal" id="tradeModal"><div class="modalbox" id="tradeModalBox"></div></div>
+<div class="modal" id="tradeModal"><div class="modalBox" id="tradeModalBox"></div></div>
 
 <script>
 const $=id=>document.getElementById(id);
-let rows=JSON.parse(localStorage.getItem('kri_rows')||'[]');
-let position=JSON.parse(localStorage.getItem('kri_position')||'null');
-let trades=JSON.parse(localStorage.getItem('kri_trades')||'[]');
-let lastState=JSON.parse(localStorage.getItem('kri_laststate')||'null');
+const KEY_ROWS='kri3_rows',KEY_LIVE='kri3_live',KEY_POS='kri3_position',KEY_TRADES='kri3_trades';
+let rows=JSON.parse(localStorage.getItem(KEY_ROWS)||'[]');
+let liveRow=JSON.parse(localStorage.getItem(KEY_LIVE)||'null');
+let position=JSON.parse(localStorage.getItem(KEY_POS)||'null');
+let trades=JSON.parse(localStorage.getItem(KEY_TRADES)||'[]');
 
 function n(v){let x=parseFloat(String(v??'').replace(/[$,%]/g,'').replace(/,/g,''));return Number.isFinite(x)?x:null}
 function fmt(v,d=2){return v==null?'—':Number(v).toFixed(d)}
@@ -119,553 +55,148 @@ function mean(a){a=a.filter(Number.isFinite);return a.length?a.reduce((x,y)=>x+y
 function ema(vals,len){let a=2/(len+1),out=[];vals.forEach((v,i)=>out.push(i? a*v+(1-a)*out[i-1]:v));return out}
 function sma(vals,len,i){if(i<len-1)return null;return mean(vals.slice(i-len+1,i+1))}
 function wilder(vals,len){let out=[];for(let i=0;i<vals.length;i++){if(i===0)out[i]=vals[i]||0;else out[i]=((out[i-1]*(len-1))+(vals[i]||0))/len}return out}
-function calcRSI(closes,len=14){
- let d=closes.map((v,i)=>i?v-closes[i-1]:0),g=d.map(x=>Math.max(x,0)),l=d.map(x=>Math.max(-x,0));
- let ag=wilder(g,len),al=wilder(l,len);return closes.map((_,i)=>al[i]===0?100:100-(100/(1+ag[i]/al[i])));
-}
-function wma(vals,len,i){if(i<len-1)return null;let s=0,w=0;for(let k=0;k<len;k++){let wt=k+1;s+=vals[i-len+1+k]*wt;w+=wt}return s/w}
-function hullSeries(vals,len){let half=Math.max(1,Math.round(len/2)),root=Math.max(1,Math.round(Math.sqrt(len))),tmp=[];
- for(let i=0;i<vals.length;i++){let a=wma(vals,half,i),b=wma(vals,len,i);tmp[i]=(a==null||b==null)?null:2*a-b}
- return tmp.map((_,i)=>{if(i<root-1||tmp.slice(i-root+1,i+1).some(x=>x==null))return null;return wma(tmp,root,i)});
-}
-function regZ(vals,i,w=10){if(i<w-1)return null;let y=vals.slice(i-w+1,i+1),x=[...Array(w).keys()],xm=mean(x),ym=mean(y),den=x.reduce((s,v)=>s+(v-xm)**2,0);
- let sl=x.reduce((s,v,k)=>s+(v-xm)*(y[k]-ym),0)/den,inter=ym-sl*xm,fit=x.map(v=>inter+sl*v),res=y.map((v,k)=>v-fit[k]),sd=Math.sqrt(res.reduce((s,v)=>s+v*v,0)/(w-1));return sd?res[w-1]/sd:0}
-function dateFromFileName(fileName,txt){
-  // Accepts both:
-  // 2026-08-10-Quote_tqqq.csv
-  // 2026-08-10-Quote.csv
-  // and any other filename that starts/contains YYYY-MM-DD.
-  const m=String(fileName||'').match(/(\d{4})-(\d{2})-(\d{2})/);
-  if(m) return `${m[1]}-${m[2]}-${m[3]}`;
-
-  // Fallback: TOS preamble such as "Quote on 8/10/26 18:01:11"
-  const q=String(txt||'').match(/Quote on\s+(\d{1,2})\/(\d{1,2})\/(\d{2,4})/i);
-  if(q){
-    let yy=parseInt(q[3],10); if(yy<100) yy+=2000;
-    return `${yy}-${String(q[1]).padStart(2,'0')}-${String(q[2]).padStart(2,'0')}`;
-  }
-  return null;
-}
-function csvCells(line){
-  return String(line).split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(x=>x.trim().replace(/^"|"$/g,''));
-}
+function calcRSI(closes,len=14){let d=closes.map((v,i)=>i?v-closes[i-1]:0),g=d.map(x=>Math.max(x,0)),l=d.map(x=>Math.max(-x,0)),ag=wilder(g,len),al=wilder(l,len);return closes.map((_,i)=>al[i]===0?100:100-(100/(1+ag[i]/al[i])))}
+function csvCells(line){return String(line).split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(x=>x.trim().replace(/^\"|\"$/g,''))}
+function dateFromFileName(fileName,txt){const m=String(fileName||'').match(/(\d{4})-(\d{2})-(\d{2})/);if(m)return `${m[1]}-${m[2]}-${m[3]}`;const q=String(txt||'').match(/Quote on\s+(\d{1,2})\/(\d{1,2})\/(\d{2,4})/i);if(q){let yy=parseInt(q[3],10);if(yy<100)yy+=2000;return `${yy}-${String(q[1]).padStart(2,'0')}-${String(q[2]).padStart(2,'0')}`}return null}
 function parseCSV(txt,fileName){
-  const lines=String(txt||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
-  if(!lines.length) return [];
-
-  // TOS Quote exports may include title/preamble lines. Find the real header.
-  const headerIndex=lines.findIndex(line=>{
-    const low=line.toLowerCase();
-    return low.includes('symbol') && low.includes('last') && low.includes('open') && low.includes('high') && low.includes('low');
-  });
-  if(headerIndex<0) return [];
-
-  const h=csvCells(lines[headerIndex]);
-  const key=(names)=>h.findIndex(x=>names.some(z=>x.toLowerCase().replace(/\s+/g,'').includes(z.replace(/\s+/g,''))));
-  const ix={
-    date:key(['date']),symbol:key(['symbol','ticker']),open:key(['open']),high:key(['high']),
-    low:key(['low']),close:key(['close','last']),vol:key(['volume','vol']),rsi:key(['rsi']),
-    atr:key(['atr']),ema:key(['ema20']),s50:key(['sma50']),s200:key(['sma200']),avgvol:key(['avgvol20','averagevolume20'])
-  };
-  const fallbackDate=dateFromFileName(fileName,txt);
-
-  return lines.slice(headerIndex+1).map(line=>{
-    const c=csvCells(line);
-    const get=i=>i>=0?c[i]:null;
-    return {
-      date: ix.date>=0 ? get(ix.date) : fallbackDate,
-      symbol: ix.symbol>=0 ? get(ix.symbol) : 'TQQQ',
-      open:n(get(ix.open)), high:n(get(ix.high)), low:n(get(ix.low)), close:n(get(ix.close)),
-      volume:n(get(ix.vol)), rsi:n(get(ix.rsi)), atr:n(get(ix.atr)),
-      ema20:n(get(ix.ema)), sma50:n(get(ix.s50)), sma200:n(get(ix.s200)),
-      avgVol20:n(get(ix.avgvol))
-    };
-  }).filter(r=>r.date&&r.close!=null).sort((a,b)=>new Date(a.date)-new Date(b.date));
+ const lines=String(txt||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(!lines.length)return [];
+ const headerIndex=lines.findIndex(line=>{const low=line.toLowerCase();return low.includes('symbol')&&low.includes('open')&&low.includes('high')&&low.includes('low')&&(low.includes('last')||low.includes('close'))});if(headerIndex<0)return [];
+ const h=csvCells(lines[headerIndex]),key=names=>h.findIndex(x=>names.some(z=>x.toLowerCase().replace(/\s+/g,'').includes(z.replace(/\s+/g,''))));
+ const ix={date:key(['date']),symbol:key(['symbol','ticker']),open:key(['open']),high:key(['high']),low:key(['low']),close:key(['close','last']),vol:key(['volume','vol']),rsi:key(['rsi14','rsi']),atr:key(['atr14','atr']),ema:key(['ema20']),s50:key(['sma50']),s200:key(['sma200']),avgvol:key(['avgvol20','averagevolume20'])};
+ const fallbackDate=dateFromFileName(fileName,txt);
+ return lines.slice(headerIndex+1).map(line=>{let c=csvCells(line),g=i=>i>=0?c[i]:null;return {date:ix.date>=0?g(ix.date):fallbackDate,symbol:ix.symbol>=0?g(ix.symbol):'TQQQ',open:n(g(ix.open)),high:n(g(ix.high)),low:n(g(ix.low)),close:n(g(ix.close)),volume:n(g(ix.vol)),rsi:n(g(ix.rsi)),atr:n(g(ix.atr)),ema20:n(g(ix.ema)),sma50:n(g(ix.s50)),sma200:n(g(ix.s200)),avgVol20:n(g(ix.avgvol))}}).filter(r=>r.date&&r.close!=null&&(!r.symbol||String(r.symbol).toUpperCase().includes('TQQQ'))).sort((a,b)=>new Date(a.date)-new Date(b.date));
 }
-function mergeUploadedRows(existing,incoming){
-  const map=new Map();
-  (existing||[]).forEach(r=>{ if(r&&r.date) map.set(`${r.symbol||'TQQQ'}|${r.date}`,r); });
-  (incoming||[]).forEach(r=>{
-    if(!r||!r.date) return;
-    const k=`${r.symbol||'TQQQ'}|${r.date}`;
-    // Same-day upload replaces the live daily bar with the newest TOS values.
-    map.set(k,{...(map.get(k)||{}),...r});
-  });
-  return [...map.values()].sort((a,b)=>new Date(a.date)-new Date(b.date));
+function parseHistory(txt){
+ const lines=String(txt||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);if(!lines.length)return [];
+ const headerIndex=lines.findIndex(line=>{let q=line.toLowerCase();return q.includes('date')&&q.includes('open')&&q.includes('high')&&q.includes('low')&&(q.includes('close')||q.includes('last'))});if(headerIndex<0)return [];
+ const h=csvCells(lines[headerIndex]),key=names=>h.findIndex(x=>names.some(z=>x.toLowerCase().replace(/\s+/g,'').includes(z.replace(/\s+/g,''))));
+ const ix={date:key(['date']),symbol:key(['symbol','ticker']),open:key(['open']),high:key(['high']),low:key(['low']),close:key(['close','last']),vol:key(['volume','vol']),rsi:key(['rsi14','rsi']),atr:key(['atr14','atr']),ema:key(['ema20']),s50:key(['sma50']),s200:key(['sma200']),avgvol:key(['avgvol20','averagevolume20'])};
+ return lines.slice(headerIndex+1).map(line=>{let c=csvCells(line),g=i=>i>=0?c[i]:null;return {date:g(ix.date),symbol:ix.symbol>=0?g(ix.symbol):'TQQQ',open:n(g(ix.open)),high:n(g(ix.high)),low:n(g(ix.low)),close:n(g(ix.close)),volume:n(g(ix.vol)),rsi:n(g(ix.rsi)),atr:n(g(ix.atr)),ema20:n(g(ix.ema)),sma50:n(g(ix.s50)),sma200:n(g(ix.s200)),avgVol20:n(g(ix.avgvol))}}).filter(r=>r.date&&r.close!=null&&(!r.symbol||String(r.symbol).toUpperCase().includes('TQQQ'))).sort((a,b)=>new Date(a.date)-new Date(b.date));
 }
+function mergeRows(base,incoming){const m=new Map();(base||[]).forEach(r=>r?.date&&m.set(r.date,r));(incoming||[]).forEach(r=>r?.date&&m.set(r.date,{...(m.get(r.date)||{}),...r}));return [...m.values()].sort((a,b)=>new Date(a.date)-new Date(b.date))}
 function enrich(rs){
- let c=rs.map(r=>r.close), e20=ema(c,20), rsi14=calcRSI(c,14), rsi39=calcRSI(c,39);
- // Approximate Dad StochRSI pipeline; to be verified against TOS later.
- let st=rsi39.map((v,i)=>{if(i<38)return null;let a=rsi39.slice(i-38,i+1),lo=Math.min(...a),hi=Math.max(...a);return hi===lo?50:100*(v-lo)/(hi-lo)});
- let white=hullSeries(st.map(x=>x??0),3), black=hullSeries(st.map(x=>x??0),2);
- return rs.map((r,i)=>{
-   let tr=i?Math.max(r.high-r.low,Math.abs(r.high-c[i-1]),Math.abs(r.low-c[i-1])):r.high-r.low;
-   let trs=rs.slice(0,i+1).map((q,j)=>j?Math.max(q.high-q.low,Math.abs(q.high-c[j-1]),Math.abs(q.low-c[j-1])):q.high-q.low);
-   let atr=r.atr ?? wilder(trs,14)[i], av=sma(rs.map(x=>x.volume),20,i);
-   return {...r,ema20:r.ema20??e20[i],sma50:r.sma50??sma(c,50,i),sma200:r.sma200??sma(c,200,i),rsi:r.rsi??rsi14[i],atr,atrPct:atr/r.close*100,avgVol20:av,volRatio:av?r.volume/av:null,mom3:i>=3?(r.close/c[i-3]-1)*100:null,emaSlope5:i>=5?(e20[i]/e20[i-5]-1)*100:null,reg:regZ(c,i,10),stWhite:white[i],stBlack:black[i],stBull:i>0&&white[i]!=null&&black[i]!=null&&white[i]>black[i]&&white[i-1]<=black[i-1]};
- });
+ const c=rs.map(r=>r.close),e20=ema(c,20),rsi14=calcRSI(c,14);const trs=rs.map((q,j)=>j?Math.max(q.high-q.low,Math.abs(q.high-c[j-1]),Math.abs(q.low-c[j-1])):q.high-q.low),atr14=wilder(trs,14);
+ return rs.map((r,i)=>{const avPrev20=i>=20?mean(rs.slice(i-20,i).map(x=>x.volume)):null;const high252=i>=251?Math.max(...rs.slice(i-251,i+1).map(x=>x.high)):Math.max(...rs.slice(0,i+1).map(x=>x.high));return {...r,ema20:r.ema20??e20[i],sma50:r.sma50??sma(c,50,i),sma200:r.sma200??sma(c,200,i),rsi:r.rsi??rsi14[i],atr:r.atr??atr14[i],atrPct:(r.atr??atr14[i])/r.close*100,avgVol20:r.avgVol20??avPrev20,volRatio:(r.avgVol20??avPrev20)?r.volume/(r.avgVol20??avPrev20):null,emaSlope5:i>=5?((r.ema20??e20[i])/(rs[i-5].ema20??e20[i-5])-1)*100:null,pullback5:i>=5?(r.close/c[i-5]-1)*100:null,distEma:r.ema20!=null||e20[i]!=null?(r.close/(r.ema20??e20[i])-1)*100:null,distSma50:r.sma50!=null||sma(c,50,i)!=null?(r.close/(r.sma50??sma(c,50,i))-1)*100:null,high252,pctFromHigh:high252?(r.close/high252-1)*100:null};});
 }
-function progressObj(checks,labels){const passed=checks.filter(Boolean).length,score=Math.round(passed/checks.length*100);const missing=labels.filter((_,i)=>!checks[i]);return {score,state:score===100?'READY':score>=67?'PREPARING':score>=34?'WATCHING':'EARLY',missing:missing[0]||'All conditions met'}}
-function setupProgress(r,prev,type){if(!r)return {score:0,state:'NO DATA',missing:'Load data'};if(type==='exceptional')return progressObj([r.rsi<30,r.atrPct>4,r.emaSlope5>-8],['RSI below 30','ATR above 4%','20 EMA slope better than -8%']);if(type==='normal')return progressObj([r.rsi>=30&&r.rsi<35,r.atrPct>4,r.volRatio>=1.25,r.emaSlope5>-6],['RSI 30–35','ATR above 4%','Volume at least 1.25×','20 EMA slope better than -6%']);if(type==='active'){const a=r.reg!=null&&r.reg<=-1,b=r.rsi<50;let c=[a,b],l=['Regression -1.00 or lower','RSI below 50'];if(a&&b){c.push(!!r.stBull);l.push('StochRSI bullish crossover')}return progressObj(c,l)}return progressObj([r.reg!=null&&r.reg>=-.5&&r.reg<=.5,prev?r.close>prev.close:false,r.mom3!=null&&r.mom3>0],['Regression -0.50 to +0.50','Today moving up','3-day move positive'])}
-function metricCard(label,value,explain,color='var(--blue)'){return `<div class="metric"><div class="metricTop"><div class="metricLabel">${label}</div><div class="statusDot" style="background:${color}"></div></div><div class="metricValue">${value}</div><div class="metricExplain">${explain}</div></div>`}
-function trendRead(r){if(!r||r.sma50==null||r.sma200==null)return ['Building…','Need more history','var(--yellow)'];if(r.close>r.sma50&&r.sma50>r.sma200)return ['Healthy','Price is above the 50 and 200 SMA.','var(--green)'];if(r.close>r.sma200)return ['Mixed','Above the 200 SMA, but the shorter trend is not fully aligned.','var(--yellow)'];return ['Weak','Price is below the 200 SMA.','var(--red)']}
+function viewRows(){let base=rows.slice();if(liveRow){base=mergeRows(base,[liveRow])}return enrich(base)}
+function isFinalToday(){if(!rows.length)return false;const last=rows.at(-1);return !liveRow && !!last}
+function activeSource(){if(liveRow)return 'live';return rows.length?'final':'none'}
+function currentAndPrev(){const vr=viewRows();return {vr,r:vr.at(-1),prev:vr.at(-2),i:vr.length-1}}
+function daysSinceEntry(vr,date){const idx=vr.findIndex(x=>x.date===date);return idx<0?null:Math.max(1,vr.length-idx)}
 
-const setupDefs={
- exceptional:{
-  grade:'A+',name:'Exceptional Rebound',color:'var(--red)',
-  meaning:'TQQQ has been hit unusually hard, but the pullback still has enough structure to support a rebound.',
-  history:{win:'100%',avg:'+17.6%',days:'~10 days',sample:'7 setups'},
-  smallSample:'Strong historical result, but only 7 historical setups — treat the win rate cautiously.'
- },
- normal:{
-  grade:'A',name:'Normal Rebound',color:'var(--orange)',
-  meaning:'A deeper pullback where TQQQ historically rebounded well without reaching full panic.',
-  history:{win:'89%',avg:'+7%',days:'5–7 days',sample:'9 setups'},
-  smallSample:'Very strong historical result, but only 9 setups — still a small sample.'
- },
- active:{
-  grade:'B',name:'Active',color:'var(--yellow)',
-  meaning:'A meaningful short-term pullback. First TQQQ must become stretched and soft; then momentum must begin turning back up.',
-  history:{win:'61%',avg:'+4.7%',days:'~5 days',sample:'23 setups'},
-  smallSample:'More evidence than A/A+, but still not a huge sample.'
- },
- continuation:{
-  grade:'C',name:'Continuation',color:'var(--blue)',
-  meaning:'TQQQ is already moving higher and sitting near its short-term trend instead of being deeply pulled back.',
-  history:{win:'54%',avg:'+1%',days:'4–5 days',sample:'133 setups'},
-  smallSample:'Largest sample, but also the weakest historical edge. This is the lower-confidence setup.'
+function trendResetState(vr,r,i,mode){
+ if(!r||i<20)return {name:'Trend Reset',status:'WAIT',score:0,checks:[],next:'Load more history.'};
+ const checks=[
+  {label:'20 EMA is rising',ok:r.emaSlope5!=null&&r.emaSlope5>0,now:`20 EMA change: ${pct(r.emaSlope5)}`,watch:'On TOS, the 20 EMA should be pointing upward.'},
+  {label:'TQQQ pulled back recently',ok:r.pullback5!=null&&r.pullback5<0,now:`5-day move: ${pct(r.pullback5)}`,watch:'Price should have backed off instead of racing straight up.'},
+  {label:'Price is near the 20 EMA',ok:r.distEma!=null&&r.distEma>=-0.5&&r.distEma<=2.0,now:`Price vs 20 EMA: ${pct(r.distEma)}`,watch:'Price should be close to the 20 EMA, not far above or clearly below it.'},
+  {label:'Volatility is strong enough',ok:r.atrPct!=null&&r.atrPct>=3,now:`ATR: ${pct(r.atrPct)}`,watch:'This simply tells us TQQQ is moving enough to make the trade worthwhile.'}
+ ];
+ const volOk=r.volRatio!=null&&r.volRatio>=1.0;
+ checks.push({label:'Volume confirms the move',ok:mode==='live'?null:volOk,now:`Volume: ${r.volRatio==null?'—':fmt(r.volRatio,2)+'× normal'}`,watch:mode==='live'?'Volume is still building. Final volume is judged after the close.':'Final volume should be at least normal.'});
+ const hard=checks.slice(0,4).every(c=>c.ok===true),allFinal=hard&&volOk;
+ let status='WAIT',next='This setup is not close enough yet.';
+ if(mode==='final'&&allFinal){status='BUY';next='Trend Reset is confirmed. Historical entry was the next session open.'}
+ else if(mode==='live'&&hard){status='READY IF CLOSE HOLDS';next='The price setup is lined up. Final volume still has to confirm at the close.'}
+ else{
+   const nearEma=r.distEma!=null&&r.distEma>=-1.25&&r.distEma<=3.0;
+   const nearPull=r.pullback5!=null&&r.pullback5<1.5;
+   const structure=(r.emaSlope5||0)>-0.4&&nearEma&&nearPull;
+   if(structure){status='GETTING CLOSE';const miss=checks.find(c=>c.ok===false);next=miss?`Waiting for: ${miss.label}.`:'The setup is developing.'}
  }
-};
-
-function setupConditions(r,prev,type){
-  if(!r)return [];
-  if(type==='exceptional') return [
-    {title:'RSI below 30',ok:r.rsi<30,now:`Today: ${fmt(r.rsi,1)}`,need:'Needs: below 30'},
-    {title:'ATR above 4%',ok:r.atrPct>4,now:`Today: ${pct(r.atrPct)}`,need:'Needs: above 4%'},
-    {title:'20 EMA slope better than -8%',ok:r.emaSlope5>-8,now:`Today: ${pct(r.emaSlope5)}`,need:'Needs: above -8%'}
-  ];
-  if(type==='normal') return [
-    {title:'RSI between 30 and 35',ok:r.rsi>=30&&r.rsi<35,now:`Today: ${fmt(r.rsi,1)}`,need:'Needs: 30–35'},
-    {title:'ATR above 4%',ok:r.atrPct>4,now:`Today: ${pct(r.atrPct)}`,need:'Needs: above 4%'},
-    {title:'Volume at least 1.25× normal',ok:r.volRatio>=1.25,now:`Today: ${r.volRatio==null?'—':fmt(r.volRatio,2)+'×'}`,need:'Needs: 1.25× or more'},
-    {title:'20 EMA slope better than -6%',ok:r.emaSlope5>-6,now:`Today: ${pct(r.emaSlope5)}`,need:'Needs: above -6%'}
-  ];
-  if(type==='active'){
-    const baseReady=r.reg!=null&&r.reg<=-1&&r.rsi<50;
-    const out=[
-      {title:'10-Day Regression -1.00 or lower',ok:r.reg!=null&&r.reg<=-1,now:`Today: ${r.reg==null?'—':fmt(r.reg,2)}`,need:'Needs: -1.00 or lower'},
-      {title:'RSI below 50',ok:r.rsi<50,now:`Today: ${fmt(r.rsi,1)}`,need:'Needs: below 50'}
-    ];
-    if(baseReady){
-      out.push({title:'StochRSI white crosses above black',ok:!!r.stBull,now:`Today: White ${r.stWhite==null?'—':fmt(r.stWhite,1)} / Black ${r.stBlack==null?'—':fmt(r.stBlack,1)}`,need:'Needs: bullish crossover within 2 days'});
-    }
-    return out;
-  }
-  return [
-    {title:'10-Day Regression between -0.50 and +0.50',ok:r.reg!=null&&r.reg>=-.5&&r.reg<=.5,now:`Today: ${r.reg==null?'—':fmt(r.reg,2)}`,need:'Needs: -0.50 to +0.50'},
-    {title:'Today moving up',ok:!!(prev&&r.close>prev.close),now:prev?`Today: ${pct((r.close/prev.close-1)*100)}`:'Today: —',need:'Needs: positive day'},
-    {title:'3-day move positive',ok:r.mom3!=null&&r.mom3>0,now:`Today: ${r.mom3==null?'—':pct(r.mom3)}`,need:'Needs: above 0%'}
-  ];
+ return {name:'Trend Reset',status,checks,next};
 }
-function closestMissing(conds){
-  const m=conds.filter(c=>!c.ok);
-  return m.length?m[0].title:'All required conditions are lined up.';
+function deepRecoveryState(vr,r,i,mode){
+ if(!r||i<60)return {name:'Deep Recovery',status:'WAIT',checks:[],next:'Load more history.'};
+ const recent=vr.slice(Math.max(0,i-19),i+1);const deepest=Math.min(...recent.map(x=>x.pctFromHigh??0));const washout=deepest<=-22;
+ const prev=vr[i-1];const reclaim=!!(prev&&prev.sma50!=null&&prev.close<=prev.sma50&&r.sma50!=null&&r.close>r.sma50);
+ const near50=r.distSma50!=null&&r.distSma50>=-2&&r.distSma50<=1.5;
+ const volControlled=r.volRatio!=null&&r.volRatio<=0.95;
+ const checks=[
+  {label:'A big washout happened recently',ok:washout,now:`Deepest recent drop: ${pct(deepest)}`,watch:'On TOS, this should look like a real selloff, not a small dip.'},
+  {label:'Price is reclaiming the 50 SMA',ok:mode==='live'?(r.sma50!=null&&r.close>r.sma50):reclaim,now:`Price vs 50 SMA: ${pct(r.distSma50)}`,watch:'Watch the 50 SMA. TQQQ needs to move back above it.'},
+  {label:'Reclaim volume stays controlled',ok:mode==='live'?null:volControlled,now:`Volume: ${r.volRatio==null?'—':fmt(r.volRatio,2)+'× normal'}`,watch:mode==='live'?'Do not judge this volume until the day is complete.':'We prefer the reclaim without unusually heavy volume.'}
+ ];
+ let status='WAIT',next='No Deep Recovery setup right now.';
+ if(mode==='final'&&washout&&reclaim&&volControlled){status='BUY';next='Deep Recovery is confirmed. Historical entry was the next session open.'}
+ else if(mode==='live'&&washout&&r.sma50!=null&&r.close>r.sma50){status='WATCH THE 50 SMA';next='TQQQ is above the 50 SMA right now. It must still be above it at the close.'}
+ else if(washout&&near50){status='GETTING CLOSE';next='Watch the 50 SMA. TQQQ is close to a possible recovery reclaim.'}
+ return {name:'Deep Recovery',status,checks,next};
 }
-function setupStatusFromConds(type,conds){
-  if(!conds.length)return 'NO DATA';
-  const pass=conds.filter(c=>c.ok).length;
-  if(pass===conds.length)return type==='active'&&conds.length<3?'PREPARING':'READY';
-  const ratio=pass/conds.length;
-  return ratio>=.66?'PREPARING':ratio>=.33?'WATCHING':'EARLY';
+function chooseDecision(a,b,mode){
+ const rank={'BUY':6,'READY IF CLOSE HOLDS':5,'WATCH THE 50 SMA':5,'GETTING CLOSE':4,'WAIT':1};
+ let best=rank[a.status]>=rank[b.status]?a:b;
+ if(a.status==='BUY'&&b.status==='BUY')best=a;
+ let title='WAIT',text='No good setup right now. Let TQQQ come to us.',color='var(--muted)';
+ if(best.status==='BUY'){title='BUY NEXT SESSION';text=best.next;color='var(--green)'}
+ else if(best.status==='READY IF CLOSE HOLDS'){title='READY IF CLOSE HOLDS';text=best.next;color='var(--yellow)'}
+ else if(best.status==='WATCH THE 50 SMA'){title='WATCH THE 50 SMA';text=best.next;color='var(--yellow)'}
+ else if(best.status==='GETTING CLOSE'){title='GETTING CLOSE';text=best.next;color='var(--blue)'}
+ return {...best,title,text,color};
 }
-function setupLearnCard(r,prev,type,expanded=false){
-  const d=setupDefs[type],conds=setupConditions(r,prev,type),status=setupStatusFromConds(type,conds);
-  const pass=conds.filter(c=>c.ok).length;
-  const score=conds.length?Math.round(pass/conds.length*100):0;
-  const unmet=conds.filter(c=>!c.ok);
-  const reason=unmet.length
-    ? `Why it is not ${d.name} yet: ${unmet.map(c=>c.title).join('; ')}.`
-    : `${d.name} requirements are currently lined up.`;
-  const reqs=conds.map(c=>`<div class="req">
-    <div><div class="reqTitle">${c.title}</div><div class="reqDetail">${c.now} · ${c.need}</div></div>
-    <div class="reqStatus" style="background:${c.ok?'#37d67a18':'#ffd34d18'};color:${c.ok?'var(--green)':'var(--yellow)'}">${c.ok?'✓ READY':'WAIT'}</div>
-  </div>`).join('');
-  return `<div class="setupRow expanded">
-    <div class="setupRowHead">
-      <div class="setupRowTop">
-        <div><span class="setupName">${d.grade} — ${d.name}</span><div class="small">${status==='READY'?'All current requirements are ready.':`Next: ${closestMissing(conds)}`}</div></div>
-        <div class="setupState" style="background:color-mix(in srgb, ${d.color} 18%, transparent);color:${d.color}">${status}</div>
-      </div>
-      <div class="progress"><div class="progressFill" style="width:${score}%;background:${d.color}"></div></div>
-      <div class="small">${score}% of current requirements ready</div>
-    </div>
-    <div class="setupRowBody">
-      <div class="setupMeaning">${d.meaning}</div>
-      <div class="requirements">${reqs}</div>
-      <div class="histStrip">
-        <div class="histBox"><b>${d.history.win}</b><span>historical winners</span></div>
-        <div class="histBox"><b>${d.history.avg}</b><span>average result</span></div>
-        <div class="histBox"><b>${d.history.days}</b><span>usual hold</span></div>
-        <div class="histBox"><b>${d.history.sample}</b><span>backtest sample</span></div>
-      </div>
-      <div class="whyNot">${reason}</div>
-      <div class="sampleWarn">${d.smallSample}</div>
-    </div>
-  </div>`;
-}
-
-
-let currentScreen='home';
-let selectedSetupType=null;
-
-function clamp01(v){return Math.max(0,Math.min(1,v))}
-function nearMin(value,min,span){
-  if(value==null)return 0;
-  if(value>=min)return 1;
-  return clamp01(1-(min-value)/span);
-}
-function nearMax(value,max,span){
-  if(value==null)return 0;
-  if(value<=max)return 1;
-  return clamp01(1-(value-max)/span);
-}
-function nearRange(value,lo,hi,span){
-  if(value==null)return 0;
-  if(value>=lo&&value<=hi)return 1;
-  const d=value<lo?lo-value:value-hi;
-  return clamp01(1-d/span);
-}
-function tradeCloseness(r,prev,type){
-  if(!r)return 0;
-  let parts=[];
-  if(type==='exceptional'){
-    parts=[nearMax(r.rsi,30,12),nearMin(r.atrPct,4,2.5),nearMin(r.emaSlope5,-8,6)];
-  }else if(type==='normal'){
-    parts=[nearRange(r.rsi,30,35,12),nearMin(r.atrPct,4,2.5),nearMin(r.volRatio,1.25,.8),nearMin(r.emaSlope5,-6,6)];
-  }else if(type==='active'){
-    const reg=nearMax(r.reg,-1,1.5), rsi=nearMax(r.rsi,50,20);
-    const base=(r.reg!=null&&r.reg<=-1&&r.rsi<50);
-    const st=base?(r.stBull?1:.55):.35;
-    parts=[reg,rsi,st];
-  }else{
-    const dayMove=prev?((r.close/prev.close)-1)*100:null;
-    parts=[nearRange(r.reg,-.5,.5,1.2),dayMove==null?0:(dayMove>0?1:clamp01(1+dayMove/4)),r.mom3==null?0:(r.mom3>0?1:clamp01(1+r.mom3/6))];
-  }
-  return Math.round(parts.reduce((a,b)=>a+b,0)/parts.length*100);
-}
-function setupViewModel(r,prev,type){
-  const d=setupDefs[type];
-  const conds=setupConditions(r,prev,type);
-  const status=setupStatusFromConds(type,conds);
-  const closeness=tradeCloseness(r,prev,type);
-  const unmet=conds.filter(c=>!c.ok);
-  let next=unmet.length?unmet[0].title:'All requirements are lined up.';
-  if(type==='active' && r && r.reg!=null&&r.reg<=-1&&r.rsi<50 && conds.length<3) next='Wait for the StochRSI bullish crossover.';
-  return {type,d,conds,status,closeness,next};
-}
-function rankedSetups(r,prev){
-  const priority={exceptional:4,normal:3,active:2,continuation:1};
-  return ['exceptional','normal','active','continuation']
-    .map(type=>setupViewModel(r,prev,type))
-    .sort((a,b)=>b.closeness-a.closeness || priority[b.type]-priority[a.type]);
-}
-function statusColor(status,d){
-  if(status==='READY')return 'var(--green)';
-  if(status==='PREPARING')return 'var(--yellow)';
-  if(status==='WATCHING')return 'var(--blue)';
-  return 'var(--muted)';
-}
-function setupIndicators(type){
-  if(type==='exceptional')return [
-    ['RSI 14','Looks for a very oversold reading below 30.'],
-    ['ATR %','Needs volatility above 4%.'],
-    ['20 EMA 5-Day Slope','Makes sure the short trend is not collapsing too fast.']
-  ];
-  if(type==='normal')return [
-    ['RSI 14','Needs a deep pullback between 30 and 35.'],
-    ['ATR %','Needs volatility above 4%.'],
-    ['Volume vs Normal','Needs at least 1.25× the 20-day average.'],
-    ['20 EMA 5-Day Slope','Must be better than -6%.']
-  ];
-  if(type==='active')return [
-    ['10-Day Regression','Needs -1.00 or lower.'],
-    ['RSI 14','Needs below 50.'],
-    ['StochRSI','Only matters after Regression and RSI are ready; white must cross above black.']
-  ];
-  return [
-    ['10-Day Regression','Needs to sit between -0.50 and +0.50.'],
-    ['Daily Price Move','Today must be positive.'],
-    ['3-Day Momentum','The last three trading days must be net positive.']
-  ];
-}
-function showHome(){
-  currentScreen='home';selectedSetupType=null;
-  document.getElementById('screen-home').classList.add('active');
-  document.getElementById('screen-detail').classList.remove('active');
-  render();
-}
-function openSetup(type){
-  selectedSetupType=type;currentScreen='detail';
-  document.getElementById('screen-home').classList.remove('active');
-  document.getElementById('screen-detail').classList.add('active');
-  renderDetailPage(type);
-  window.scrollTo(0,0);
-}
-
-function stateEngine(r, prev){
- if(!r)return {name:'NO DATA',grade:'',state:'NO DATA',color:'var(--muted)',next:'Upload the TOS daily CSV to begin.',checks:[]};
- // priority A+ > A > B > C
- let ex=[['RSI below 30',r.rsi<30,`RSI ${fmt(r.rsi,1)}`],['ATR above 4%',r.atrPct>4,`ATR ${pct(r.atrPct)}`],['20 EMA slope better than -8%',r.emaSlope5>-8,`Slope ${pct(r.emaSlope5)}`]];
- if(ex.every(x=>x[1])) return mk('EXCEPTIONAL REBOUND','A+','LIVE SETUP','var(--green)','Wait for final daily confirmation, then watch the next session entry price.',ex,'exceptional');
- let normal=[['RSI 30–35',r.rsi>=30&&r.rsi<35,`RSI ${fmt(r.rsi,1)}`],['ATR above 4%',r.atrPct>4,`ATR ${pct(r.atrPct)}`],['Volume at least 1.25×',r.volRatio>=1.25,`Volume ${fmt(r.volRatio,2)}×`],['20 EMA slope better than -6%',r.emaSlope5>-6,`Slope ${pct(r.emaSlope5)}`]];
- if(normal.every(x=>x[1])) return mk('NORMAL REBOUND','A','LIVE SETUP','var(--green)','Wait for final daily confirmation, then watch the next session entry price.',normal,'normal');
- let activeBase=r.reg<=-1&&r.rsi<50;
- if(activeBase){
-   let active=[['Regression -1.00 or lower',true,`Regression ${fmt(r.reg,2)}`],['RSI below 50',true,`RSI ${fmt(r.rsi,1)}`],['StochRSI bullish crossover',!!r.stBull,`White ${fmt(r.stWhite,1)} / Black ${fmt(r.stBlack,1)}`]];
-   if(r.stBull)return mk('ACTIVE','B','LIVE SETUP','var(--green)','Bullish crossover is present. Wait for final daily confirmation.',active,'active');
-   return mk('ACTIVE','B','PREPARING','var(--yellow)','Waiting for the StochRSI white line to cross above the black line.',active,'active');
- }
- let cont=[['Regression -0.50 to +0.50',r.reg>=-.5&&r.reg<=.5,`Regression ${fmt(r.reg,2)}`],['Today moving up',prev?r.close>prev.close:false,prev?`${pct((r.close/prev.close-1)*100)}`:'—'],['3-day move positive',r.mom3>0,`3-day ${pct(r.mom3)}`]];
- if(cont.every(x=>x[1]))return mk('CONTINUATION','C','LIVE SETUP','var(--green)','Wait for final daily confirmation. This is the lower-confidence setup.',cont,'continuation');
- // preparing/watch closest
- if(r.rsi>=30&&r.rsi<=40)return mk('NORMAL REBOUND','A','WATCHING','var(--yellow)',`RSI is ${fmt(r.rsi,1)}. Watch for 30–35 and the other Normal conditions.`,normal,'normal');
- if(r.reg<=-0.5||r.rsi<=52){
-   let checks=[['Regression -1.00 or lower',r.reg<=-1,`Regression ${fmt(r.reg,2)}`],['RSI below 50',r.rsi<50,`RSI ${fmt(r.rsi,1)}`]];
-   let missing=checks.filter(x=>!x[1])[0];
-   return mk('ACTIVE','B',checks.filter(x=>x[1]).length?'PREPARING':'WATCHING','var(--yellow)',missing?`Waiting for: ${missing[0]}.`:'Setup is developing.',checks,'active');
- }
- if(r.reg>=-.75&&r.reg<=.75)return mk('CONTINUATION','C','WATCHING','var(--blue)','Regression is near the Continuation zone. Waiting for positive price momentum.',cont,'continuation');
- return mk('NONE','','NO TRADE','var(--muted)','No validated setup is close enough right now. Wait.',[],'none');
-}
-function mk(name,grade,state,color,next,checks,type){return{name,grade,state,color,next,checks,type}}
-const hist={
- exceptional:{win:'100%',avg:'+17.6%',days:'~10',sample:'7 setups',stop:.12,chase:.03},
- normal:{win:'89%',avg:'+7%',days:'5–7',sample:'9 setups',stop:null,chase:.03},
- active:{win:'61%',avg:'+4.7%',days:'~5',sample:'23 setups',stop:.06,chase:.03},
- continuation:{win:'54%',avg:'+1%',days:'4–5',sample:'133 setups',stop:.05,chase:.03}
-};
-function barHTML(reg,type){
- let min=-2,max=2,p=Math.max(0,Math.min(100,(reg-min)/(max-min)*100)),l=0,w=0;
- if(type==='active'){l=0;w=25}else if(type==='continuation'){l=37.5;w=25}else{l=25;w=25}
- return `<div class="bar"><div class="sweet" style="left:${l}%;width:${w}%"></div><div class="marker" style="left:${p}%"></div></div><div class="small">Regression today: <b style="color:#fff">${fmt(reg,2)}</b></div>`;
+function statusTag(s){if(s==='BUY')return ['BUY','var(--green)'];if(s==='READY IF CLOSE HOLDS'||s==='WATCH THE 50 SMA')return [s,'var(--yellow)'];if(s==='GETTING CLOSE')return [s,'var(--blue)'];return ['WAIT','var(--muted)']}
+function tosSteps(type){
+ if(type==='Trend Reset')return [
+  ['Find the 20 EMA','This is the faster trend line.'],
+  ['Check the direction','The 20 EMA should be pointing upward.'],
+  ['Watch price come back toward it','We want a pullback toward the 20 EMA, not a big breakdown.'],
+  ['Look for price to hold near the line','If price stays near or just above the 20 EMA into the close, the setup may be ready.']
+ ];
+ return [
+  ['Find the 50 SMA','This is the recovery line for this setup.'],
+  ['Look back at the recent selloff','TQQQ should have had a real drop from its recent high.'],
+  ['Watch price move back above the 50 SMA','An intraday move above is only an attempt.'],
+  ['Make sure it finishes above the line','The app will only confirm the setup after the final daily upload.']
+ ];
 }
 function render(){
- rows=enrich(rows);
- if(currentScreen==='detail' && selectedSetupType){renderDetailPage(selectedSetupType);return}
- const r=rows.at(-1),prev=rows.at(-2);
- const change=prev&&r?((r.close/prev.close)-1)*100:null;
-
- $('clock').textContent=r?`${r.date} · ${rows.length} saved daily bars`:'NO DATA';
- $('topPrice').innerHTML=r
-   ?`<div class="priceTicker">TQQQ</div><div class="priceValue">$${fmt(r.close)}</div><div class="priceMove" style="color:${change>=0?'var(--green)':'var(--red)'}">${change>=0?'+':''}${pct(change)}</div>`
-   :`<div class="priceTicker">TQQQ</div><div class="priceValue">—</div><div class="priceMove">No data</div>`;
- $('historyReady').innerHTML=rows.length>=200?`<b style="color:var(--green)">History ready ✓</b><br>All long lookbacks available`
-   :rows.length>=20?`<b style="color:var(--yellow)">Core data ready</b><br>${rows.length} daily bars loaded`
-   :`<b style="color:var(--yellow)">Needs history</b><br>${rows.length}/20 minimum bars`;
-
- if(position){
-   $('positionBanner').innerHTML=`<div class="positionBanner"><div><b>OPEN POSITION · ${position.grade} ${position.name}</b><div class="small">${position.qty} shares at $${fmt(position.price)}</div></div><button class="stockBtn secondary" onclick="openSetup('${position.type}')">View Trade</button></div>`;
- }else $('positionBanner').innerHTML='';
-
- if(!r){
-   $('trend-list').innerHTML=`<div class="trendCard"><div class="trendName">Load TQQQ history to begin</div><div class="trendMeaning">Once history is loaded, the four trade setups will be ranked here from closest to farthest from a trade.</div></div>`;
-   return;
- }
-
- const ranked=rankedSetups(r,prev);
- $('trend-list').innerHTML=ranked.map((v,i)=>{
-   const c=statusColor(v.status,v.d);
-   const h=v.d.history;
-   const ready=v.status==='READY';
-   return `<div class="trendCard" onclick="openSetup('${v.type}')" style="${i===0?'border-color:'+c+';':''}">
-     <div class="trendTop">
-       <div>
-         <div class="trendGrade" style="color:${v.d.color}">${i===0?'#1 CLOSEST · ':''}${v.d.grade}</div>
-         <div class="trendName">${v.d.name}</div>
-         <div class="trendMeaning">${v.d.meaning}</div>
-       </div>
-       <div style="display:flex;align-items:center;gap:5px">
-         <div class="stateBadge" style="background:color-mix(in srgb, ${c} 17%, transparent);color:${c}">${v.status}</div>
-         <div class="cardChevron">›</div>
-       </div>
-     </div>
-     <div class="readyBar"><div class="readyFill" style="width:${v.closeness}%;background:${c}"></div></div>
-     <div class="readyLine"><span>${v.closeness}% close to this setup</span><span>${v.conds.filter(x=>x.ok).length}/${v.conds.length} requirements ready</span></div>
-     <div class="nextLine"><div class="nextLabel">${ready?'STATUS':'NEXT'}</div><div class="nextText">${ready?'This pattern is currently lined up. Open it to review the entry rules.':v.next}</div></div>
-     <div class="cardStats">
-       <div class="miniStat"><b>${h.win}</b> historical winners</div>
-       <div class="miniStat"><b>${h.avg}</b> avg result</div>
-       <div class="miniStat"><b>${h.days}</b> hold</div>
-     </div>
-   </div>`;
- }).join('');
+ const {vr,r,prev,i}=currentAndPrev();const mode=activeSource();
+ const change=r&&prev?((r.close/prev.close)-1)*100:null;
+ $('topPrice').innerHTML=r?`<div class="ticker">TQQQ</div><div class="price">$${fmt(r.close)}</div><div class="move" style="color:${change>=0?'var(--green)':'var(--red)'}">${change>=0?'+':''}${pct(change)}</div>`:`<div class="ticker">TQQQ</div><div class="price">—</div><div class="move">No data</div>`;
+ $('dataState').textContent=r?`${r.date} · ${mode==='live'?'LIVE UPDATE':'DAY COMPLETE'} · ${rows.length} completed bars`:'NO DATA';
+ $('liveBanner').innerHTML=mode==='live'?`<div class="liveBanner live"><b>LIVE — DAY STILL IN PROGRESS</b><br>These numbers can change before the close. The app will not confirm a Buy until the Final Daily Upload.</div>`:mode==='final'?`<div class="liveBanner final"><b>DAY COMPLETE</b><br>Today's completed bar is final and can confirm a setup.</div>`:'';
+ if(!r){$('decisionArea').innerHTML=`<div class="section empty">Load TQQQ history to begin.</div>`;$('detailsArea').innerHTML='';return}
+ if(position){renderPosition(vr,r);return}else $('positionArea').innerHTML='';
+ const a=trendResetState(vr,r,i,mode),b=deepRecoveryState(vr,r,i,mode),d=chooseDecision(a,b,mode);
+ $('decisionArea').innerHTML=`<div class="hero" style="border-color:${d.color}"><div class="eyebrow">TODAY'S ANSWER</div><div class="decision" style="color:${d.color}">${d.title}</div><div class="setupName">${d.name}</div><div class="decisionText">${d.text}</div><div class="heroMeta"><div class="chip">${mode==='live'?'Live data':'Final daily data'}</div><div class="chip">Signal version: v1.0</div>${d.status==='BUY'?`<button class="btn buy" onclick="openBuy('${d.name}')">RECORD BUY</button>`:''}</div></div>`;
+ const [ta,ca]=statusTag(a.status),[tb,cb]=statusTag(b.status);
+ $('detailsArea').innerHTML=`
+ <div class="section"><div class="sectionTitle">What Dad should watch on Thinkorswim</div><div class="sectionSub">The app gives the decision. The chart helps him see why.</div><div class="tosCard"><div class="tosTitle">${d.name}</div>${tosSteps(d.name).map((x,k)=>`<div class="tosStep"><div class="num">${k+1}</div><div><b>${x[0]}</b><span>${x[1]}</span></div></div>`).join('')}</div></div>
+ <div class="section"><div class="sectionTitle">Today's setup</div><div class="sectionSub">Only the setup that matters most needs Dad's attention.</div>${d.checks.map(c=>`<div class="check"><div><div class="checkTitle">${c.label}</div><div class="checkNow">${c.now}<br>${c.watch}</div></div><div class="pill ${c.ok===true?'ok':c.ok===false?'no':'wait'}">${c.ok===true?'READY':c.ok===false?'NOT YET':'WAIT FOR CLOSE'}</div></div>`).join('')}</div>
+ <div class="section"><div class="sectionTitle">The two playbooks</div><div class="sectionSub">Different market situations. The app chooses which one matters today.</div>
+   <div class="playbookRow ${d.name==='Trend Reset'?'active':''}"><div><h3>Trend Reset</h3><p>Healthy uptrend, short pullback toward the rising 20 EMA, then rebound.</p></div><div class="statusTag" style="color:${ca};background:color-mix(in srgb, ${ca} 18%, transparent)">${ta}</div></div>
+   <div class="playbookRow ${d.name==='Deep Recovery'?'active':''}"><div><h3>Deep Recovery</h3><p>Major selloff, then TQQQ repairs the damage and moves back above the 50 SMA.</p></div><div class="statusTag" style="color:${cb};background:color-mix(in srgb, ${cb} 18%, transparent)">${tb}</div></div>
+ </div>`;
 }
-
-function renderDetailPage(type){
- rows=enrich(rows);
- const r=rows.at(-1),prev=rows.at(-2),v=setupViewModel(r,prev,type),d=v.d,h=d.history;
- if(!r){$('detail-content').innerHTML='<div class="detailHero">Load TQQQ data first.</div>';return}
- const change=prev?((r.close/prev.close)-1)*100:null;
- $('detailPrice').innerHTML=`$${fmt(r.close)} <span style="font-size:11px;color:${change>=0?'var(--green)':'var(--red)'}">${change>=0?'+':''}${pct(change)}</span>`;
- const c=statusColor(v.status,d);
- const allReady=v.conds.length&&v.conds.every(x=>x.ok);
- const statusText=allReady
-   ?`All of the requirements for ${d.name} are currently lined up.`
-   :`${v.closeness}% close. The next thing this setup needs is: ${v.next}`;
- const reqs=v.conds.map(x=>`<div class="patternReq">
-   <div><div class="patternReqName">${x.title}</div><div class="patternReqNow">${x.now} · ${x.need}</div></div>
-   <div class="reqPill" style="background:${x.ok?'#00C80518':'#F5C51818'};color:${x.ok?'var(--green)':'var(--yellow)'}">${x.ok?'✓ READY':'WAIT'}</div>
- </div>`).join('');
- const indicators=setupIndicators(type).map(x=>`<div class="indicatorItem"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
- let extra='';
- if(type==='normal'&&r.volRatio!=null) extra=`<div class="warningText"><b>Volume note:</b> ${fmt(r.volRatio,2)}× is today's volume compared with the 20-day full-day average. During the trading day, that number is still building; final volume strength is best judged at the close.</div>`;
- if(type==='active' && !(r.reg!=null&&r.reg<=-1&&r.rsi<50)) extra+=`<div class="warningText">StochRSI stays secondary until Regression and RSI are ready. It should not drive the decision by itself.</div>`;
-
- $('detail-content').innerHTML=`
-   <div class="detailHero" style="border-color:${c}">
-     <div class="detailGrade" style="color:${d.color}">${d.grade} SETUP · ${v.status}</div>
-     <div class="detailName">${d.name}</div>
-     <div class="detailMeaning">${d.meaning}</div>
-     <div class="detailStatus" style="border-color:${c}">
-       <div class="detailStatusTitle" style="color:${c}">WHAT IS HAPPENING RIGHT NOW</div>
-       <div class="detailStatusText">${statusText}</div>
-     </div>
-     <div class="readyBar"><div class="readyFill" style="width:${v.closeness}%;background:${c}"></div></div>
-     <div class="readyLine"><span>${v.closeness}% close</span><span>${v.conds.filter(x=>x.ok).length}/${v.conds.length} requirements ready</span></div>
-     ${allReady&&!position?`<div class="actionArea"><button class="btn btn-buy" onclick="openBuyForType('${type}')">BUY / RECORD TRADE</button></div>`:''}
-     ${position&&position.type===type?`<div class="actionArea"><button class="btn btn-sell" onclick="openSell()">SELL / RECORD EXIT</button></div>`:''}
-   </div>
-
-   <div class="detailSection">
-     <div class="detailSectionTitle">What has to line up</div>
-     <div class="detailSectionSub">The setup only earns this tag when its required conditions are ready.</div>
-     ${reqs}
-     ${extra}
-   </div>
-
-   <div class="detailSection">
-     <div class="detailSectionTitle">Historical backtest</div>
-     <div class="detailSectionSub">What happened when this pattern appeared in the TQQQ history we tested.</div>
-     <div class="backtestGrid">
-       <div class="backBox"><b>${h.win}</b><span>winners</span></div>
-       <div class="backBox"><b>${h.avg}</b><span>average result</span></div>
-       <div class="backBox"><b>${h.days}</b><span>usual hold</span></div>
-       <div class="backBox"><b>${h.sample}</b><span>sample size</span></div>
-     </div>
-     <div class="warningText">${d.smallSample}</div>
-   </div>
-
-   <div class="detailSection">
-     <div class="detailSectionTitle">Indicators this setup watches</div>
-     <div class="detailSectionSub">Only the indicators that matter for this pattern.</div>
-     <div class="indicatorList">${indicators}</div>
-   </div>
-
-   <div class="detailSection">
-     <div class="detailSectionTitle">What happens next</div>
-     <div class="detailStatus" style="margin-top:8px"><div class="detailStatusText">${
-       allReady
-       ? `The setup is lined up. Review the entry and do not chase more than the allowed 3% above the confirmed signal close.`
-       : `Wait for ${v.next}. Do not force a trade just because another indicator looks good.`
-     }</div></div>
-   </div>`;
+function renderPosition(vr,r){
+ $('decisionArea').innerHTML='';$('detailsArea').innerHTML='';
+ const pnl=(r.close/position.price-1)*100,day=daysSinceEntry(vr,position.signalDate||position.date)||1;
+ const isTrend=position.playbook==='Trend Reset',maxDays=isTrend?7:10,profitZone=pnl>=6,runner=!isTrend&&pnl>=10;
+ let state='HOLD',color='var(--blue)',msg=isTrend?'Trend Reset usually works over about 5–7 trading days.':'Deep Recovery usually needs more time — about 8–10 trading days.';
+ if(pnl<=-6){state='SELL / STOP AREA';color='var(--red)';msg='The trade has reached the emergency loss area. Do not turn a trade into a hope.'}
+ else if(day>=maxDays){state='DECISION DAY';color='var(--yellow)';msg='The normal hold window has been reached. Review the chart and protect the trade.'}
+ else if(runner){state='RUNNER';color='var(--green)';msg='Deep Recovery is in runner territory. Protect profit, but do not automatically cap a strong recovery.'}
+ else if(profitZone){state='PROFIT PROVEN';color='var(--green)';msg='The trade reached the +6% profit checkpoint. This is a decision point, not an automatic sell.'}
+ $('positionArea').innerHTML=`<div class="positionHero"><div class="positionTop"><div><div class="eyebrow">YOU OWN TQQQ</div><div class="positionTitle">${position.playbook}</div></div><div class="positionState" style="color:${color};background:color-mix(in srgb, ${color} 18%, transparent)">${state}</div></div><div class="positionGrid"><div class="stat"><b>$${fmt(position.price)}</b><span>bought</span></div><div class="stat"><b>$${fmt(r.close)}</b><span>now</span></div><div class="stat"><b style="color:${pnl>=0?'var(--green)':'var(--red)'}">${pnl>=0?'+':''}${pct(pnl)}</b><span>gain / loss</span></div><div class="stat"><b>${day}</b><span>trading day of ~${maxDays}</span></div></div><div class="actionText"><b>What to do:</b> ${msg}</div><div class="actions"><button class="btn sell" onclick="openSell()">RECORD SELL</button></div></div>`;
+ const steps=tosSteps(position.playbook);
+ $('detailsArea').innerHTML=`<div class="section"><div class="sectionTitle">What Dad should watch now</div><div class="sectionSub">Use the same line that created the trade.</div><div class="tosCard"><div class="tosTitle">${position.playbook}</div>${steps.map((x,k)=>`<div class="tosStep"><div class="num">${k+1}</div><div><b>${x[0]}</b><span>${x[1]}</span></div></div>`).join('')}</div></div>`;
 }
-
-function openBuyForType(type){
- const r=rows.at(-1),prev=rows.at(-2),v=setupViewModel(r,prev,type);
- if(!v.conds.length||!v.conds.every(x=>x.ok))return alert('This setup is not fully ready yet.');
- const old=stateEngine;
- // Directly build the buy modal from the selected setup instead of relying on state priority.
- const h=hist[type],max=r.close*(1+h.chase),risk=100;
- const stop=type==='normal'?r.low-.5*r.atr:r.close*(1-h.stop);
- const riskPer=Math.max(.01,r.close-stop),qty=Math.max(1,Math.min(Math.floor(3000/r.close),Math.floor(risk/riskPer)));
- $('tradeModalBox').innerHTML=`<div class="setup">Confirm BUY</div><p class="sub">${v.d.grade} — ${v.d.name}</p>
- <label class="lbl">Actual fill price</label><input class="field" id="buyPrice" value="${fmt(r.close)}">
- <label class="lbl">Quantity</label><input class="field" id="buyQty" value="${qty}">
- <div class="row"><div class="lbl">Maximum chase price</div><div class="val">$${fmt(max)}</div></div>
- <div class="row"><div class="lbl">Suggested stop</div><div class="val">$${fmt(stop)}</div></div>
- <div class="actions"><button class="btn" onclick="closeModal()">CANCEL</button><button class="btn btn-buy" onclick="confirmBuy('${type}','${v.d.grade}','${v.d.name}',${stop},${max})">CONFIRM BUY</button></div>`;
- $('tradeModal').classList.add('show');
+function openBuy(playbook){
+ const {r}=currentAndPrev();if(activeSource()!=='final')return alert('A Buy can only be confirmed from the Final Daily Upload.');
+ $('tradeModalBox').innerHTML=`<div class="modalTitle">Record BUY</div><div class="tiny">${playbook} · Enter the actual fill from the next trading session.</div><div class="fieldLabel">Actual fill price</div><input class="field" id="buyPrice" value="${fmt(r.close)}"><div class="fieldLabel">Shares</div><input class="field" id="buyQty" value="1"><div class="tiny" style="margin-top:8px">Emergency stop reference: about 6% below the actual fill. The app will track the trade using the playbook that created it.</div><div class="actions"><button class="btn secondary" onclick="closeModal()">CANCEL</button><button class="btn buy" onclick="confirmBuy('${playbook}')">SAVE BUY</button></div>`;$('tradeModal').classList.add('show');
 }
-function renderPosition(r){
- let type=position.type,h=hist[type],pnl=r?(r.close/position.price-1)*100:null,days=Math.max(0,Math.round((new Date(r.date)-new Date(position.date))/86400000));
- let exit=false,msg='Trade is open. Follow the setup exit rule.';
- if(type==='active'&&r.rsi>=60){exit=true;msg='RSI reached 60 — Active exit area reached.'}
- if(type==='continuation'&&r.reg>=1){exit=true;msg='Regression reached +1.00 — Continuation exit area reached.'}
- if(type==='normal'&&pnl>=5){msg='Normal reached +5% — consider taking half profit.'}
- if(type==='exceptional'&&pnl>=15){msg='Exceptional reached +15% — take half profit and trail the rest.'}
- if((type==='active'&&days>=7)||(type==='continuation'&&days>=10)||(type==='normal'&&days>=10)||(type==='exceptional'&&days>=16)){exit=true;msg='Time-based exit window reached.'}
- $('hero').style.borderColor=exit?'var(--red)':'var(--blue)';
- $('hero').innerHTML=`<div class="state" style="color:${exit?'var(--red)':'var(--blue)'}">${exit?'EXIT':'HOLD'}</div><div class="big">${position.grade} — ${position.name}</div>
- <div class="sub">${position.qty} shares · Entry $${fmt(position.price)} · Current $${fmt(r?.close)} · ${days} calendar days</div>
- <div class="next" style="background:${exit?'#ff5c6718':'#55a7ff18'};border:1px solid ${exit?'var(--red)':'var(--blue)'}"><div class="state" style="color:${exit?'var(--red)':'var(--blue)'}">WHAT'S NEXT</div>${msg}</div>
- <div class="actions"><button class="btn btn-sell" onclick="openSell()">SELL</button></div>`;
- $('setupCard').innerHTML=`<div class="setup">Trade Status</div>
- <div class="row"><div class="lbl">Current gain / loss</div><div class="val" style="color:${pnl>=0?'var(--green)':'var(--red)'}">${pct(pnl)}</div></div>
- <div class="row"><div class="lbl">Dollars invested</div><div class="val">$${fmt(position.price*position.qty)}</div></div>
- <div class="row"><div class="lbl">Current value</div><div class="val">$${fmt((r?.close||position.price)*position.qty)}</div></div>
- <div class="row"><div class="lbl">Stop</div><div class="val">$${fmt(position.stop)}</div></div>
- ${r?barHTML(r.reg,type):''}`;
- $('positionCard').innerHTML=`<div class="setup">Open Position</div><div class="row"><div class="lbl">Bought</div><div class="val">${position.date}</div></div><div class="row"><div class="lbl">Actual fill</div><div class="val">$${fmt(position.price)} × ${position.qty}</div></div>`;
- $('nowGrid').innerHTML=r?metricCard('Current Price',`$${fmt(r.close)}`,`Entry was $${fmt(position.price)}.`,'var(--blue)'):''; $('dataDepth').textContent=''; $('setupList').innerHTML=''; $('dataCard').innerHTML=`<div class="sectionTitle"><span>Data Status</span></div><div class="row"><div class="lbl">Saved daily bars</div><div class="val">${rows.length}</div></div>`;
- renderHistory();
-}
-function renderHistory(){
- $('historyCard').innerHTML=`<div class="setup">Trade History</div>${trades.length?trades.slice().reverse().slice(0,5).map(t=>`<div class="row"><div><div class="lbl">${t.grade} ${t.name}</div><div class="small">${t.buyDate} → ${t.sellDate}</div></div><div class="val" style="color:${t.pnl>=0?'var(--green)':'var(--red)'}">${pct(t.pnl)}</div></div>`).join(''):'<p class="sub">No completed trades yet.</p>'}`;
-}
-function openBuy(){
- let r=rows.at(-1),s=stateEngine(r,rows.at(-2)),h=hist[s.type],max=r.close*(1+h.chase),risk=100;
- let stop=s.type==='normal'?r.low-.5*r.atr:r.close*(1-h.stop);
- let riskPer=Math.max(.01,r.close-stop),qty=Math.max(1,Math.min(Math.floor(3000/r.close),Math.floor(risk/riskPer)));
- $('tradeModalBox').innerHTML=`<div class="setup">Confirm BUY</div><p class="sub">${s.grade} — ${s.name}</p>
- <label class="lbl">Actual fill price</label><input class="field" id="buyPrice" value="${fmt(r.close)}">
- <label class="lbl">Quantity</label><input class="field" id="buyQty" value="${qty}">
- <div class="row"><div class="lbl">Maximum chase price</div><div class="val">$${fmt(max)}</div></div>
- <div class="row"><div class="lbl">Suggested stop</div><div class="val">$${fmt(stop)}</div></div>
- <div class="actions"><button class="btn" onclick="closeModal()">CANCEL</button><button class="btn btn-buy" onclick="confirmBuy('${s.type}','${s.grade}','${s.name}',${stop},${max})">CONFIRM BUY</button></div>`;
- $('tradeModal').classList.add('show');
-}
-function confirmBuy(type,grade,name,stop,max){
- let r=rows.at(-1),price=n($('buyPrice').value),qty=Math.floor(n($('buyQty').value)||0);
- if(!price||qty<1)return alert('Enter a valid price and quantity.');
- if(price>max&&!confirm('This fill is above the 3% maximum chase price. Record it anyway?'))return;
- position={type,grade,name,price,qty,stop,date:r.date};
- localStorage.setItem('kri_position',JSON.stringify(position));closeModal();render();
-}
-function openSell(){
- let r=rows.at(-1);
- $('tradeModalBox').innerHTML=`<div class="setup">Confirm SELL</div><p class="sub">${position.grade} — ${position.name}</p>
- <label class="lbl">Actual sell price</label><input class="field" id="sellPrice" value="${fmt(r.close)}">
- <label class="lbl">Quantity to sell</label><input class="field" id="sellQty" value="${position.qty}">
- <div class="actions"><button class="btn" onclick="closeModal()">CANCEL</button><button class="btn btn-sell" onclick="confirmSell()">CONFIRM SELL</button></div>`;
- $('tradeModal').classList.add('show');
-}
-function confirmSell(){
- let r=rows.at(-1),price=n($('sellPrice').value),qty=Math.min(position.qty,Math.floor(n($('sellQty').value)||0));if(!price||qty<1)return alert('Enter a valid sell price and quantity.');
- let pnl=(price/position.price-1)*100;trades.push({grade:position.grade,name:position.name,buyDate:position.date,sellDate:r.date,buy:position.price,sell:price,qty,pnl});
- position.qty-=qty;if(position.qty<=0)position=null;
- localStorage.setItem('kri_position',JSON.stringify(position));localStorage.setItem('kri_trades',JSON.stringify(trades));closeModal();render();
-}
+function confirmBuy(playbook){const {r}=currentAndPrev();const price=n($('buyPrice').value),qty=Math.floor(n($('buyQty').value)||0);if(!price||qty<1)return alert('Enter a valid fill price and share quantity.');position={playbook,price,qty,date:r.date,signalDate:r.date,ruleVersion:'v1.0'};localStorage.setItem(KEY_POS,JSON.stringify(position));closeModal();render()}
+function openSell(){const {r}=currentAndPrev();$('tradeModalBox').innerHTML=`<div class="modalTitle">Record SELL</div><div class="tiny">Enter the actual sell price.</div><div class="fieldLabel">Actual sell price</div><input class="field" id="sellPrice" value="${fmt(r.close)}"><div class="fieldLabel">Shares to sell</div><input class="field" id="sellQty" value="${position.qty}"><div class="actions"><button class="btn secondary" onclick="closeModal()">CANCEL</button><button class="btn sell" onclick="confirmSell()">SAVE SELL</button></div>`;$('tradeModal').classList.add('show')}
+function confirmSell(){const {r}=currentAndPrev();const price=n($('sellPrice').value),qty=Math.min(position.qty,Math.floor(n($('sellQty').value)||0));if(!price||qty<1)return alert('Enter a valid sell price and share quantity.');const pnl=(price/position.price-1)*100;trades.push({playbook:position.playbook,buyDate:position.date,sellDate:r.date,buy:position.price,sell:price,qty,pnl,ruleVersion:position.ruleVersion});position.qty-=qty;if(position.qty<=0)position=null;localStorage.setItem(KEY_POS,JSON.stringify(position));localStorage.setItem(KEY_TRADES,JSON.stringify(trades));closeModal();render()}
 function closeModal(){$('tradeModal').classList.remove('show')}
-$('backHome').addEventListener('click',showHome);
-$('historyCsv').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{let text=rd.result,lines=String(text||'').split(/\r?\n/).map(v=>v.trim()).filter(Boolean),headerIndex=lines.findIndex(line=>{let q=line.toLowerCase();return q.includes('date')&&q.includes('open')&&q.includes('high')&&q.includes('low')&&(q.includes('close')||q.includes('last'))});if(headerIndex<0)return alert('History file needs Date, Open, High, Low, Close/Last and Volume.');let h=csvCells(lines[headerIndex]),key=names=>h.findIndex(a=>names.some(z=>a.toLowerCase().replace(/\s+/g,'').includes(z.replace(/\s+/g,'')))),ix={date:key(['date']),symbol:key(['symbol','ticker']),open:key(['open']),high:key(['high']),low:key(['low']),close:key(['close','last']),vol:key(['volume','vol']),rsi:key(['rsi']),atr:key(['atr']),ema:key(['ema20']),s50:key(['sma50']),s200:key(['sma200'])};let x=lines.slice(headerIndex+1).map(line=>{let c=csvCells(line),g=i=>i>=0?c[i]:null;return {date:g(ix.date),symbol:ix.symbol>=0?g(ix.symbol):'TQQQ',open:n(g(ix.open)),high:n(g(ix.high)),low:n(g(ix.low)),close:n(g(ix.close)),volume:n(g(ix.vol)),rsi:n(g(ix.rsi)),atr:n(g(ix.atr)),ema20:n(g(ix.ema)),sma50:n(g(ix.s50)),sma200:n(g(ix.s200))}}).filter(r=>r.date&&r.close!=null);if(!x.length)return alert('No valid history rows found.');rows=mergeUploadedRows(rows,x);localStorage.setItem('kri_rows',JSON.stringify(rows));render();alert(`History loaded. ${rows.length} daily rows are now saved.`);e.target.value=''};rd.readAsText(f)});
-$('csv').addEventListener('change',e=>{
-  let f=e.target.files[0]; if(!f)return;
-  let rd=new FileReader();
-  rd.onload=()=>{
-    let x=parseCSV(rd.result,f.name);
-    if(!x.length) return alert('I could not read this TOS Quote file. I need Symbol, Last, Open, High and Low. The date can come from the filename.');
-    rows=mergeUploadedRows(rows,x);
-    localStorage.setItem('kri_rows',JSON.stringify(rows));
-    render();
-    const d=x[x.length-1].date, sym=x[x.length-1].symbol||'TQQQ';
-    alert(`${sym} ${d} loaded successfully. ${rows.length} daily row${rows.length===1?'':'s'} saved in the app.`);
-    e.target.value='';
-  };
-  rd.readAsText(f);
-});
-$('tradeModal').addEventListener('click',e=>{if(e.target===$('tradeModal'))closeModal()});
-currentScreen='home';
+function handleHistory(file){const rd=new FileReader();rd.onload=()=>{const x=parseHistory(rd.result);if(!x.length)return alert('History file needs Date, Open, High, Low, Close/Last and Volume.');rows=mergeRows(rows,x);localStorage.setItem(KEY_ROWS,JSON.stringify(rows));render();alert(`History loaded. ${rows.length} completed daily bars are saved.`)};rd.readAsText(file)}
+function handleLive(file){const rd=new FileReader();rd.onload=()=>{const x=parseCSV(rd.result,file.name);if(!x.length)return alert('I could not read this TQQQ TOS file.');liveRow=x.at(-1);localStorage.setItem(KEY_LIVE,JSON.stringify(liveRow));render();alert(`${liveRow.date} live TQQQ update loaded. This does NOT confirm a Buy.`)};rd.readAsText(file)}
+function handleFinal(file){const rd=new FileReader();rd.onload=()=>{const x=parseCSV(rd.result,file.name);if(!x.length)return alert('I could not read this TQQQ TOS file.');const final=x.at(-1);rows=mergeRows(rows,[final]);liveRow=null;localStorage.setItem(KEY_ROWS,JSON.stringify(rows));localStorage.removeItem(KEY_LIVE);render();alert(`${final.date} saved as the FINAL daily bar. The app can now confirm or reject today's setup.`)};rd.readAsText(file)}
+$('historyCsv').addEventListener('change',e=>{const f=e.target.files[0];if(f)handleHistory(f);e.target.value=''})
+$('liveCsv').addEventListener('change',e=>{const f=e.target.files[0];if(f)handleLive(f);e.target.value=''})
+$('finalCsv').addEventListener('change',e=>{const f=e.target.files[0];if(f)handleFinal(f);e.target.value=''})
+$('tradeModal').addEventListener('click',e=>{if(e.target===$('tradeModal'))closeModal()})
 render();
 </script>
-</body></html>
+</body>
+</html>
