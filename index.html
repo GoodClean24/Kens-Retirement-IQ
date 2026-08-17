@@ -47,7 +47,7 @@
 <script>
 const $=id=>document.getElementById(id);
 const KEY_ROWS='kri3_rows',KEY_LIVE='kri3_live',KEY_POS='kri3_position',KEY_TRADES='kri3_trades',KEY_SIGNALS='kri3_signals';
-const STARTING_ACCOUNT=3000,MAX_TRADE_DOLLARS=1000,EMERGENCY_STOP_PCT=0.06,APP_VERSION='MASTER-1.4';
+const STARTING_ACCOUNT=3000,MAX_TRADE_DOLLARS=1000,EMERGENCY_STOP_PCT=0.06,APP_VERSION='MASTER-1.5';
 let rows=JSON.parse(localStorage.getItem(KEY_ROWS)||'[]');
 let liveRow=JSON.parse(localStorage.getItem(KEY_LIVE)||'null');
 let position=JSON.parse(localStorage.getItem(KEY_POS)||'null');
@@ -364,6 +364,72 @@ function render(){
    <div class="maintenance"><details><summary>More · setup & strategy review</summary><div class="maintenanceBody"><label class="fileBtn history" for="historyCsv">Load History</label><button class="fileBtn history" type="button" onclick="exportStrategyReview()">Strategy Review Export</button></div><div style="padding:0 14px 14px"><div class="miniNote">Load History is a setup/maintenance tool, not a daily task. Strategy Review Export is for periodic AI analysis.</div></div></details></div>`;
 }
 
+
+
+function trendResetHoldHealthHTML(vr,r){
+ if(!position||position.playbook!=='Trend Reset')return '';
+ const buyDate=position.buyDate||position.date;
+ const hasData=!!(r&&r.date>=buyDate);
+ if(!hasData)return `<div class="section"><div class="sectionTitle">Trend Reset Hold Health</div><div class="sectionSub">This starts after Dad's first live update following the Buy.</div><div class="actionText"><b>BOUGHT</b> — Waiting for current trade data.</div></div>`;
+ const above20=r.ema20!=null&&r.close>=r.ema20;
+ const emaHealthy=r.emaSlope5!=null&&r.emaSlope5>=0;
+ const stopIntact=!position.stopTouched&&!position.gapBelowStop;
+ const pnl=(r.close/position.price-1)*100;
+ let warnings=[];
+ if(!above20)warnings.push('Price has moved below the 20 EMA.');
+ if(!emaHealthy)warnings.push('The 20 EMA has started falling.');
+ let health='HEALTHY',color='var(--green)',message='The Trend Reset is behaving normally. Keep following the trade plan.';
+ if(!stopIntact){health='STOP HIT';color='var(--red)';message='The emergency stop has been triggered. This is an actual exit condition, not just a warning.';}
+ else if(warnings.length>=2){health='WEAKENING';color='var(--yellow)';message='Price is below the 20 EMA and the 20 EMA is falling. The trade is weakening, but this is still a warning — not a new automatic sell rule.';}
+ else if(warnings.length===1){health='WATCH';color='var(--yellow)';message=warnings[0]+' Keep watching the trade, but do not sell just because one health check changed.';}
+ let milestone='WORKING',milestoneColor='var(--blue)',milestoneText='The trade has not reached the +6% profit checkpoint yet.';
+ if(position.profitProven){milestone='PROFIT PROVEN';milestoneColor='var(--green)';milestoneText='This trade has reached +6% at least once. That milestone stays recorded even if price pulls back.';}
+ const priceVs20=r.ema20?((r.close/r.ema20)-1)*100:null;
+ const checks=[
+   {title:'Price vs 20 EMA',now:r.ema20==null?'Need more data':`Price $${fmt(r.close)} · 20 EMA $${fmt(r.ema20)} · ${priceVs20>=0?'+':''}${pct(priceVs20)}`,ok:above20,good:'ABOVE',bad:'BELOW'},
+   {title:'20 EMA direction',now:r.emaSlope5==null?'Need more data':`20 EMA 5-day change: ${r.emaSlope5>=0?'+':''}${pct(r.emaSlope5)}`,ok:emaHealthy,good:'RISING',bad:'FALLING'},
+   {title:'Emergency stop',now:`Stop $${fmt(position.stop)} · Current $${fmt(r.close)}`,ok:stopIntact,good:'INTACT',bad:'STOP HIT'}
+ ];
+ return `<div class="section"><div class="sectionTitle">Trend Reset Hold Health</div><div class="sectionSub">After Dad buys, this section stops checking the entry setup and asks one simple question: “Is the trade still behaving normally?”</div>
+   <div class="actionText" style="border-color:${color};margin-bottom:10px"><div class="eyebrow" style="color:${color}">HOLD HEALTH</div><div style="font-size:20px;font-weight:1000;margin-top:3px">${health}</div><div class="tiny" style="margin-top:5px">${message}</div></div>
+   <div class="checkGrid">${checks.map(x=>`<div class="check"><div><div class="checkTitle">${x.title}</div><div class="checkNow">${x.now}</div></div><div class="pill ${x.ok?'ok':'wait'}">${x.ok?x.good:x.bad}</div></div>`).join('')}</div>
+   <div class="actionText" style="margin-top:10px;border-color:${milestoneColor}"><b style="color:${milestoneColor}">${milestone}</b><div class="tiny" style="margin-top:4px">Current trade: ${pnl>=0?'+':''}${pct(pnl)} · Best since entry: ${position.maxGainPct>=0?'+':''}${pct(position.maxGainPct)}. ${milestoneText}</div></div>
+   <div class="tiny" style="margin-top:9px"><b>Important:</b> HEALTHY / WATCH / WEAKENING help Dad understand the chart. They do not create a new sell rule. STOP HIT and the tested 5–7 trading-day decision window remain the authority.</div>
+ </div>`;
+}
+
+function deepRecoveryHoldHealthHTML(vr,r){
+ if(!position||position.playbook!=='Deep Recovery')return '';
+ const buyDate=position.buyDate||position.date;
+ const hasData=!!(r&&r.date>=buyDate);
+ if(!hasData)return `<div class="section"><div class="sectionTitle">Deep Recovery Hold Health</div><div class="sectionSub">This starts after Dad's first live update following the Buy.</div><div class="actionText"><b>BOUGHT</b> — Waiting for current trade data.</div></div>`;
+ const above50=r.sma50!=null&&r.close>r.sma50;
+ const emaHealthy=r.emaSlope5!=null&&r.emaSlope5>=0;
+ const stopIntact=!position.stopTouched&&!position.gapBelowStop;
+ const pnl=(r.close/position.price-1)*100;
+ let warnings=[];
+ if(!above50)warnings.push('Price is below the 50 SMA.');
+ if(!emaHealthy)warnings.push('The 20 EMA has started falling.');
+ let health='HEALTHY',color='var(--green)',message='The recovery is behaving normally. Keep following the trade plan.';
+ if(!stopIntact){health='STOP HIT';color='var(--red)';message='The emergency stop has been triggered. This is an actual exit condition, not just a warning.';}
+ else if(warnings.length>=2){health='WEAKENING';color='var(--yellow)';message='Both recovery checks are weakening. This is a warning, not an automatic sell. Keep watching the stop and the normal 8–10 day window.';}
+ else if(warnings.length===1){health='WATCH';color='var(--yellow)';message=warnings[0]+' The trade is still above the emergency stop, so this is a warning—not a sell signal.';}
+ let milestone='WORKING',milestoneColor='var(--blue)',milestoneText='The trade has not reached the +6% profit checkpoint yet.';
+ if(position.runnerReached){milestone='RUNNER';milestoneColor='var(--green)';milestoneText='This trade has reached +10% at least once. Protect profit, but allow a strong recovery room to continue.';}
+ else if(position.profitProven){milestone='PROFIT PROVEN';milestoneColor='var(--green)';milestoneText='This trade has reached +6% at least once. That milestone stays recorded even if price pulls back.';}
+ const checks=[
+   {title:'Price vs 50 SMA',now:r.sma50==null?'Need more data':`Price $${fmt(r.close)} · 50 SMA $${fmt(r.sma50)} · ${r.distSma50>=0?'+':''}${pct(r.distSma50)}`,ok:above50,good:'ABOVE',bad:'BELOW'},
+   {title:'20 EMA direction',now:r.emaSlope5==null?'Need more data':`20 EMA 5-day change: ${r.emaSlope5>=0?'+':''}${pct(r.emaSlope5)}`,ok:emaHealthy,good:'RISING',bad:'FALLING'},
+   {title:'Emergency stop',now:`Stop $${fmt(position.stop)} · Current $${fmt(r.close)}`,ok:stopIntact,good:'INTACT',bad:'STOP HIT'}
+ ];
+ return `<div class="section"><div class="sectionTitle">Deep Recovery Hold Health</div><div class="sectionSub">After Dad buys, this section stops asking "Was the entry perfect?" and asks "Is the recovery still behaving normally?"</div>
+   <div class="actionText" style="border-color:${color};margin-bottom:10px"><div class="eyebrow" style="color:${color}">HOLD HEALTH</div><div style="font-size:20px;font-weight:1000;margin-top:3px">${health}</div><div class="tiny" style="margin-top:5px">${message}</div></div>
+   <div class="checkGrid">${checks.map(x=>`<div class="check"><div><div class="checkTitle">${x.title}</div><div class="checkNow">${x.now}</div></div><div class="pill ${x.ok?'ok':'wait'}">${x.ok?x.good:x.bad}</div></div>`).join('')}</div>
+   <div class="actionText" style="margin-top:10px;border-color:${milestoneColor}"><b style="color:${milestoneColor}">${milestone}</b><div class="tiny" style="margin-top:4px">Current trade: ${pnl>=0?'+':''}${pct(pnl)} · Best since entry: ${position.maxGainPct>=0?'+':''}${pct(position.maxGainPct)}. ${milestoneText}</div></div>
+   <div class="tiny" style="margin-top:9px"><b>Important:</b> HEALTHY / WATCH / WEAKENING are chart-health guides. They do not create a new sell rule. STOP HIT and the tested 8–10 trading-day decision window remain the authority.</div>
+ </div>`;
+}
+
 function renderPosition(vr,r){
  $('decisionArea').innerHTML='';$('detailsArea').innerHTML='';
  const buyDate=position.buyDate||position.date;
@@ -392,7 +458,8 @@ function renderPosition(vr,r){
  const invested=position.price*position.qty,cash=Math.max(0,STARTING_ACCOUNT-invested);
  $('positionArea').innerHTML=`<div class="positionHero"><div class="positionTop"><div><div class="eyebrow">YOU OWN TQQQ</div><div class="positionTitle">${position.playbook}</div></div><div class="positionState" style="color:${color};background:color-mix(in srgb, ${color} 18%, transparent)">${state}</div></div><div class="positionGrid"><div class="stat"><b>$${fmt(position.price)}</b><span>bought</span></div><div class="stat"><b>$${fmt(currentPrice)}</b><span>now</span></div><div class="stat"><b style="color:${pnl>=0?'var(--green)':'var(--red)'}">${pnl>=0?'+':''}${pct(pnl)}</b><span>gain / loss</span></div><div class="stat"><b>${day}</b><span>trading day of ~${maxDays}</span></div></div><div class="actionText"><b>What to do:</b> ${msg}</div><div class="moneyPlan"><div class="moneyBox"><b>${position.qty}</b><span>shares owned</span></div><div class="moneyBox"><b>$${fmt(invested)}</b><span>dollars invested</span></div><div class="moneyBox"><b>$${fmt(position.stop)}</b><span>emergency stop</span></div><div class="moneyBox"><b>$${fmt(cash)}</b><span>cash remaining</span></div></div><div class="tiny" style="margin-top:9px">Signal: ${position.signalDate||'—'} · Bought: ${buyDate||'—'} · Best price since entry: $${fmt(position.highestPrice)} (${position.maxGainPct>=0?'+':''}${pct(position.maxGainPct)})<br>Buy-day note: the app uses the current/final price—not the day’s full high/low—because some of that movement may have happened before Dad’s fill.</div><div class="actions"><button class="btn sell" onclick="openSell()">RECORD SELL</button></div></div>`;
  const steps=tosSteps(position.playbook);
- $('detailsArea').innerHTML=`<div class="section"><div class="sectionTitle">What Dad should watch now</div><div class="sectionSub">Use the same line that created the trade.</div><div class="tosCard"><div class="tosTitle">${position.playbook}</div>${steps.map((x,k)=>`<div class="tosStep"><div class="num">${k+1}</div><div><b>${x[0]}</b><span>${x[1]}</span></div></div>`).join('')}</div></div>`;
+ const holdHealth=isTrend?trendResetHoldHealthHTML(vr,r):deepRecoveryHoldHealthHTML(vr,r);
+ $('detailsArea').innerHTML=`${holdHealth}<div class="section"><div class="sectionTitle">What Dad should watch now</div><div class="sectionSub">Use the chart to understand the trade, but let the app's tested stop and time window control the decision.</div><div class="tosCard"><div class="tosTitle">${position.playbook}</div>${steps.map((x,k)=>`<div class="tosStep"><div class="num">${k+1}</div><div><b>${x[0]}</b><span>${x[1]}</span></div></div>`).join('')}</div></div>`;
 }
 function openBuy(playbook,signalDate){
  const official=officialCurrent(),signalRow=official.vr.find(x=>x.date===signalDate);
